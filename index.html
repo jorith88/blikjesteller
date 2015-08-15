@@ -15,9 +15,9 @@
 		<div class="container" ng-app="blikje" ng-controller="blikjeCtrl">
 			<h2>Blikjesteller&trade;</h2>
 			<div class="row" ng-repeat="blikje in blikjes">
-				<div class="col-xs-4 col-md-4">{{blikje.name}}</div>
-				<div class="col-xs-2">{{blikje.price | currency:"&euro;"}}</div>
-				<div class="col-xs-2"><input type="number" value="{{blikje.amount}}" disabled /></div>
+				<div class="col-xs-4 col-md-4"><span>{{blikje.name}}</span></div>
+				<div class="col-xs-2"><span>{{blikje.price | currency:"&euro;"}}</span></div>
+				<div class="col-xs-2"><input type="text" value="{{blikje.amount}}" readonly /></div>
 				<div class="col-xs-2">
 					<button type="button" class="btn btn-primary btn-lg" ng-click="plusOne(blikje)">+</button>
 				</div>

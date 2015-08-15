@@ -15,6 +15,8 @@ app.controller('blikjeCtrl', function($scope) {
 	window.onbeforeunload = function (e) {
 		if ($scope.stateChanged) {
 			return "Ingevulde gegevens gaan verloren.";
+		} else {
+			return undefined;
 		}
 	};
 
