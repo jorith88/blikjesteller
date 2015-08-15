@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Blikjesteller</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<link rel="shortcut icon" type="image/x-icon" href="global/img/blikjecola.jpg" />
+		<LINK REL="apple-touch-icon" HREF="global/img/blikjecola.jpg" />
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<!-- link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" -->
+		<link rel="stylesheet" href="global/css/blikje.css">
+	</head>
+	<body>
+		<div class="container" ng-app="blikje" ng-controller="blikjeCtrl">
+			<h2>Blikjesteller&trade;</h2>
+			<div class="row" ng-repeat="blikje in blikjes">
+				<div class="col-xs-4 col-md-4">{{blikje.name}}</div>
+				<div class="col-xs-2">{{blikje.price | currency:"&euro;"}}</div>
+				<div class="col-xs-2"><input type="number" value="{{blikje.amount}}" disabled /></div>
+				<div class="col-xs-2">
+					<button type="button" class="btn btn-primary btn-lg" ng-click="plusOne(blikje)">+</button>
+				</div>
+				<div class="col-xs-2">
+					<button type="button" class="btn btn-primary btn-lg" ng-click="minusOne(blikje)">-</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-4 col-md-4"><strong>Totaal</strong></div>
+				<div class="col-xs-1"><strong>{{totalAmount | currency:"&euro;"}}</strong></div>
+			</div>
+		</div>
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+		<script src="global/js/angular.blikje.js"></script>
+	</body>
+</html>
