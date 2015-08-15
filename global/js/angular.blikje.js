@@ -4,12 +4,13 @@ app.controller('blikjeCtrl', function($scope) {
 	$scope.stateChanged = false;
 	$scope.totalAmount = 0;
 	$scope.blikjes = [
-		{'name': 'Cola', 'price': 0.7, 'amount': 0},
-		{'name': 'Cola Zero', 'price': 0.7, 'amount': 0},
-		{'name': 'Fanta', 'price': 0.7, 'amount': 0},
-		{'name': 'Minute Maid', 'price': 0.7, 'amount': 0},
-		{'name': 'Ice tea', 'price': 0.7, 'amount': 0},
-		{'name': '7-Up', 'price': 0.7, 'amount': 0},
+		{'name': 'Coca Cola', 'price': 0.7, 'amount': 0},
+		{'name': 'Coca Cola Zero', 'price': 0.7, 'amount': 0},
+		{'name': 'Spa Rood', 'price': 0.7, 'amount': 0},
+		{'name': 'Fanta Orange', 'price': 0.7, 'amount': 0},
+		{'name': 'Minute Maid', 'price': 1, 'amount': 0},
+		{'name': 'Hero Cassis', 'price': 0.8, 'amount': 0},
+		{'name': 'Nestea Lemon', 'price': 0.8, 'amount': 0},
 	];
 	
 	window.onbeforeunload = function (e) {
