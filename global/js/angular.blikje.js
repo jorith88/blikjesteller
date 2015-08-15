@@ -1,6 +1,7 @@
 var app = angular.module('blikje', []);
 
 app.controller('blikjeCtrl', function($scope) {
+	$scope.stateChanged = false;
 	$scope.totalAmount = 0;
 	$scope.blikjes = [
 		{'name': 'Cola', 'price': 0.7, 'amount': 0},
@@ -11,6 +12,12 @@ app.controller('blikjeCtrl', function($scope) {
 		{'name': '7-Up', 'price': 0.7, 'amount': 0},
 	];
 	
+	window.onbeforeunload = function (e) {
+		if ($scope.stateChanged) {
+			return "Ingevulde gegevens gaan verloren.";
+		}
+	};
+
 	$scope.plusOne = function(blikje) {
 		blikje.amount += 1;
 		updateTotal();
@@ -24,6 +31,7 @@ app.controller('blikjeCtrl', function($scope) {
 	};
 	
 	function updateTotal() {
+		$scope.stateChanged = true;
 		var totalAmount = 0;
 		angular.forEach($scope.blikjes, function(blikje) {
 		  totalAmount += (blikje.price * blikje.amount);
