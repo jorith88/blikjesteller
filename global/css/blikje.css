@@ -1,3 +1,8 @@
+.btn-primary {
+	background-color: #009DDC;
+	border: none;
+}
+
 .row {
 	margin-top:12px;
 	background-color: #f8f8f8;
