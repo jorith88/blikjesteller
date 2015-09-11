@@ -10,7 +10,7 @@ app.controller('blikjeCtrl', function($scope) {
 		{'name': 'Fanta Orange', 'price': 0.7, 'amount': 0},
 		{'name': 'Minute Maid', 'price': 1, 'amount': 0},
 		{'name': 'Hero Cassis', 'price': 0.8, 'amount': 0},
-		{'name': 'Nestea Lemon', 'price': 0.8, 'amount': 0},
+		{'name': 'Lipton Ice Tea', 'price': 0.8, 'amount': 0},
 	];
 	
 	window.onbeforeunload = function (e) {
