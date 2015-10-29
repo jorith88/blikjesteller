@@ -4,9 +4,13 @@ import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
 
+import com.dotcms.repackage.org.apache.commons.lang.StringUtils;
+import com.dotmarketing.portlets.contentlet.model.Contentlet;
+import com.dotmarketing.util.Logger;
 import com.dotmarketing.viewtools.MailerTool;
 
 import nl.jorith.dotcms.blikjesteller.rest.type.Blikje;
+import nl.jorith.dotcms.blikjesteller.util.ContentletQuery;
 
 public class EmailFacade {
 
@@ -31,7 +35,19 @@ public class EmailFacade {
 		mailBody.append("<tr><td colspan=\"4\">&nbsp;</td></tr>");
 		mailBody.append(String.format("<tr><td colspan=\"3\"><strong>Totaal</strong></td><td><strong>&euro; %s</strong></td></tr>", nf.format(totalPrice)));
 
-		MailerTool mailer = new MailerTool();
-		mailer.sendEmail("jorith@gmail.com", "blikje@jorith.nl", "Bestelling", mailBody.toString(), true);
+		ContentletQuery query = new ContentletQuery("Configuration");
+		query.addFieldLimitation(true, "key", "blikjesteller.order-email");
+		List<Contentlet> result = query.executeSafe();
+		
+		if (result.size() > 0) {
+			String orderEmail = result.get(0).getStringProperty("value");
+			
+			if (StringUtils.isNotEmpty(orderEmail)) {
+				Logger.info(this, "Send blikjes order to " + orderEmail);
+				MailerTool mailer = new MailerTool();
+				mailer.sendEmail(orderEmail, "blikje@jorith.nl", "Blikjesbestelling", mailBody.toString(), true);
+			}
+		}
+		
 	}
 }
