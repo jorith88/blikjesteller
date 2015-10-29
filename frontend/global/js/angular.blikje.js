@@ -9,7 +9,7 @@ app.controller('blikjeCtrl', function($scope, $http) {
 	});
 	
 	window.onbeforeunload = function (e) {
-		if ($scope.stateChanged) {
+		if ($scope.stateChanged && !$scope.orderSent) {
 			return "Ingevulde gegevens gaan verloren.";
 		} else {
 			return undefined;
@@ -41,5 +41,6 @@ app.controller('blikjeCtrl', function($scope, $http) {
 		  totalAmount += (blikje.price * blikje.amount);
 		});
 		$scope.totalAmount = totalAmount;
+		$scope.orderSent = false;
 	}
 });

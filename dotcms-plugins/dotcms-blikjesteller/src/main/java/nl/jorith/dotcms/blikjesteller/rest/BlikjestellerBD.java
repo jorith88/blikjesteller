@@ -48,6 +48,8 @@ public class BlikjestellerBD extends WebResource {
 	public void sendOrder(String blikjesJSON) {
 		List<Blikje> blikjes = gson.fromJson(blikjesJSON, new TypeToken<List<Blikje>>(){}.getType());
 
-		emailFacade.sendBlikjesOrder(blikjes);
+		if (blikjes.size() > 0) {
+			emailFacade.sendBlikjesOrder(blikjes);
+		}
 	}
 }
