@@ -21,19 +21,19 @@ public class EmailFacade {
 	    nf.setMinimumFractionDigits(2);
 	    nf.setMaximumFractionDigits(2);
 
-		mailBody.append("<p>Blikjesteller bestelling:</p>");
+		mailBody.append("<h3>Bestelling</h3>\n");
 
-		mailBody.append("<table>");
+		mailBody.append("<table>\n");
 		float totalPrice = 0;
 		for (Blikje blikje : blikjes) {
 			if (blikje.getAmount() > 0) {
 				totalPrice += (blikje.getPrice() * blikje.getAmount());
-				mailBody.append(String.format("<tr><td width=\"100px\">%s</td><td width=\"100px\">&euro; %s</td><td width=\"50px\">%s</td><td>&euro; %s</td></tr>", blikje.getName(), nf.format(blikje.getPrice()), blikje.getAmount(), nf.format(blikje.getAmount() * blikje.getPrice())));
+				mailBody.append(String.format("<tr><td width=\"140px\">%s</td><td width=\"70px\">&euro; %s</td><td width=\"50px\">%s</td><td>&euro; %s</td></tr>\n", blikje.getName(), nf.format(blikje.getPrice()), blikje.getAmount(), nf.format(blikje.getAmount() * blikje.getPrice())));
 			}
 		}
 		
-		mailBody.append("<tr><td colspan=\"4\">&nbsp;</td></tr>");
-		mailBody.append(String.format("<tr><td colspan=\"3\"><strong>Totaal</strong></td><td><strong>&euro; %s</strong></td></tr>", nf.format(totalPrice)));
+		mailBody.append("<tr><td colspan=\"4\">&nbsp;</td></tr>\n");
+		mailBody.append(String.format("<tr><td colspan=\"3\"><strong>Totaal</strong></td><td><strong>&euro; %s</strong></td></tr>\n", nf.format(totalPrice)));
 
 		ContentletQuery query = new ContentletQuery("Configuration");
 		query.addFieldLimitation(true, "key", "blikjesteller.order-email");

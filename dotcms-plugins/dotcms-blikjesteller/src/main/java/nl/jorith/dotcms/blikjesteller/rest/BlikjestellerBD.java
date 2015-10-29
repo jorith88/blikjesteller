@@ -28,7 +28,6 @@ public class BlikjestellerBD extends WebResource {
 		query.addLive(true);
 		query.addSorting("Blikje", "naam", true);
 
-		Logger.info(this, query.getQuery());
 		List<Contentlet> result = query.executeSafe();
 
 		List<Blikje> blikjes = new LinkedList<>();
