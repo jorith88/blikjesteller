@@ -1,0 +1,21 @@
+.btn-primary {
+	background-color: #009DDC;
+	border: none;
+}
+
+.row {
+	margin-top:12px;
+	background-color: #f8f8f8;
+    border: 1px solid #f2f2f2;
+    padding: 5px 0 5px 0;
+}
+
+.row input {
+	width:40px;
+}
+
+.row span,
+.row input {
+	position: absolute;
+	top: 10px;
+}
