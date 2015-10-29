@@ -2,7 +2,7 @@ $jsMinifyTool.addFiles("/global/js/angular.blikje.js", "page")
 $cssMinifyTool.toLinkTag("/global/css/blikje.css")
 
 <div class="container ng-cloak" ng-app="blikje" ng-controller="blikjeCtrl">
-	<h2>Blikjesteller&trade;</h2>
+    <h2>Blikjesteller&trade;</h2>
 	<div class="row" ng-repeat="blikje in blikjes">
 			<div class="col-xs-4 col-md-4"><span>{{blikje.name}}</span></div>
 			<div class="col-xs-2"><span>{{blikje.price | currency:"&euro;"}}</span></div>
@@ -18,4 +18,8 @@ $cssMinifyTool.toLinkTag("/global/css/blikje.css")
 			<div class="col-xs-4 col-md-4"><strong>Totaal</strong></div>
 			<div class="col-xs-1"><strong>{{totalAmount | currency:"&euro;"}}</strong></div>
 	</div>
+    <div class="row">
+        <button type="button" class="btn btn-primary btn-lg" ng-click="sendOrder()" ng-disabled="orderSent">Bestellen</button>
+        <div style="display: inline;" ng-show="orderSent">Bestelling verzonden!</div>
+    </div>
 </div>

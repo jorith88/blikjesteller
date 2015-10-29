@@ -13,6 +13,7 @@ import com.dotcms.repackage.javax.ws.rs.POST;
 import com.dotcms.repackage.javax.ws.rs.Path;
 import com.dotcms.rest.WebResource;
 import com.dotmarketing.portlets.contentlet.model.Contentlet;
+import com.dotmarketing.util.Logger;
 import com.google.gson.reflect.TypeToken;
 
 @Path("/blikjesteller")
@@ -25,7 +26,9 @@ public class BlikjestellerBD extends WebResource {
 	public String getBlikjesJSON() {
 		ContentletQuery query = new ContentletQuery("Blikje");
 		query.addLive(true);
+		query.addSorting("Blikje", "naam", true);
 
+		Logger.info(this, query.getQuery());
 		List<Contentlet> result = query.executeSafe();
 
 		List<Blikje> blikjes = new LinkedList<>();

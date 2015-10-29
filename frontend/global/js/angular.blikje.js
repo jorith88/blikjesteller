@@ -28,6 +28,12 @@ app.controller('blikjeCtrl', function($scope, $http) {
 		}
 	};
 	
+	$scope.sendOrder = function() {
+		$http.post('/api/blikjesteller/send-order', $scope.blikjes).then(function() {
+			$scope.orderSent = true;
+		});
+	};
+	
 	function updateTotal() {
 		$scope.stateChanged = true;
 		var totalAmount = 0;
