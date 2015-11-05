@@ -15,16 +15,16 @@ public class Activator extends ExtendedGenericBundleActivator {
 			addRestService(ctx, BlikjestellerBD.class);
 			
 
-			Logger.info(this, "Deployed Blikjesteller server plugin");
+			Logger.info(this, "Deployed Blikjesteller plugin");
 		} catch (Throwable t) {
-			Logger.error(this, "Error in Blikjesteller server plugin activator", t);
+			Logger.error(this, "Error in Blikjesteller plugin activator", t);
 			stop(ctx);
 		}
 	}
 
 	@Override
 	public void stop(BundleContext ctx) throws Exception {
-		Logger.info(this, "Undeployed Blikjesteller server plugin");
+		Logger.info(this, "Undeployed Blikjesteller plugin");
 		unregisterServices(ctx);
 	}
 }
