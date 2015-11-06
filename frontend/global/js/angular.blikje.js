@@ -29,7 +29,15 @@ app.controller('blikjeCtrl', function($scope, $http) {
 	};
 	
 	$scope.sendOrder = function() {
-		$http.post('/api/blikjesteller/send-order', $scope.blikjes).then(function() {
+		var order = {};
+		
+		angular.forEach($scope.blikjes, function(blikje) {
+			if (blikje.amount > 0) {
+				order[blikje.id] = blikje.amount;
+			}
+		});
+		
+		$http.post('/api/blikjesteller/send-order', order).then(function() {
 			$scope.orderSent = true;
 		});
 	};
