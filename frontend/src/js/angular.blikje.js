@@ -29,7 +29,9 @@ app.controller('blikjeCtrl', ['$scope', '$http', function($scope, $http) {
 	};
 
 	$scope.sendOrder = function() {
-		if (confirm('Bestelling verzenden?')) {
+		var confirm = confirm('Bestelling verzenden?');
+		
+		if (confirm) {
 			var order = {};
 			
 			angular.forEach($scope.blikjes, function(blikje) {
@@ -40,7 +42,9 @@ app.controller('blikjeCtrl', ['$scope', '$http', function($scope, $http) {
 			
 			$http.post('/api/blikjesteller/send-order', order).then(function() {
 				$scope.orderSent = true;
+				console.log('order sent 1');
 				alert('Bestelling verzonden!');
+				console.log('order sent 2');
 			});
 		}
 	};
