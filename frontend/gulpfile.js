@@ -33,7 +33,7 @@ gulp.task('scripts', function() {
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(concat('script.js'))
         .pipe(stripDebug())
-        .pipe(uglify(false))
+        .pipe(uglify({ output: { ascii_only: true } }))
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(target + '/global/js/'));
 });
