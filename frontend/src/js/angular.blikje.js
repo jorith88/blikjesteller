@@ -4,7 +4,7 @@ app.controller('blikjeCtrl', function($scope, $http) {
 	$scope.stateChanged = false;
 	$scope.totalAmount = 0;
     
-    $http.get('global/stubs/blikjes.json').success(function(data) {
+    $http.get('/api/blikjesteller/blikjes').success(function(data) {
     	$scope.blikjes = data;
 	});
 	
