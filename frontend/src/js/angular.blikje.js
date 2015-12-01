@@ -1,6 +1,6 @@
 var app = angular.module('blikje', []);
 
-app.controller('blikjeCtrl', ["$scope", "$http"], function($scope, $http) {
+app.controller('blikjeCtrl', ['$scope', '$http', function($scope, $http) {
 	$scope.stateChanged = false;
 	$scope.totalAmount = 0;
     
@@ -51,4 +51,4 @@ app.controller('blikjeCtrl', ["$scope", "$http"], function($scope, $http) {
 		$scope.totalAmount = totalAmount;
 		$scope.orderSent = false;
 	}
-});
+}]);
