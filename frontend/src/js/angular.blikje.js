@@ -29,9 +29,9 @@ app.controller('blikjeCtrl', ['$scope', '$http', function($scope, $http) {
 	};
 
 	$scope.sendOrder = function() {
-		var confirm = confirm('Bestelling verzenden?');
+		var confirmed = confirm('Bestelling verzenden?');
 		
-		if (confirm) {
+		if (confirmed) {
 			var order = {};
 			
 			angular.forEach($scope.blikjes, function(blikje) {
