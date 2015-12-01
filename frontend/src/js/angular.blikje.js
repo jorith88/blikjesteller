@@ -40,12 +40,8 @@ app.controller('blikjeCtrl', ['$scope', '$http', function($scope, $http) {
 				}
 			});
 			
-			$http.post('/api/blikjesteller/send-order', order).then(function() {
-				console.log('order sent 1');
-				alert('Bestelling verzonden!');
-				console.log('order sent 2');
-				$scope.orderSent = true;
-				console.log('order sent 3');
+			$http.post('/api/blikjesteller/send-order', order).then(function(response) {
+				console.log(response);
 			});
 		}
 	};
