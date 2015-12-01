@@ -23,8 +23,7 @@ var assets_src = [
 ];
 
 var sass_src = [
-    source + '/sass/**/*.scss',
-    'node_modules/bootstrap/dist/css/bootstrap.min.css'
+    source + '/sass/**/*.scss'
 ];
 
 // JS concat, strip debugging and minify
