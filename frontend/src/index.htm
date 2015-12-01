@@ -8,8 +8,7 @@
 		<link rel="shortcut icon" type="image/x-icon" href="global/img/blikjecola.jpg" />
 		<link rel="apple-touch-icon" href="global/img/blikjecola.jpg" />
 
-		<link rel="stylesheet" href="global/css/bootstrap.min.css"/>
-		<link rel="stylesheet" href="global/css/blikje.css"/>
+		<link rel="stylesheet" href="global/css/base.css"/>
 
 		<script src="global/js/script.js"></script>
 	</head>
@@ -37,7 +36,6 @@
 			<div class="row" ng-show="blikjes">
 				<div class="col-xs-12">
 					<button type="button" class="btn btn-primary btn-lg" ng-click="sendOrder()" ng-disabled="orderSent || totalAmount == 0">Bestellen</button>
-					<div style="display: inline;" ng-show="orderSent">Bestelling verzonden!</div>
 				</div>
 			</div>
 		</div>
