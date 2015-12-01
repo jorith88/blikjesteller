@@ -42,13 +42,7 @@ app.controller('blikjeCtrl', ['$scope', '$http', function($scope, $http) {
 			
 			$http.post('/api/blikjesteller/send-order', order)
 				.then(function(response) {
-					console.log('success',response);
-				})
-				.catch(function(response) {
-					console.error('error', response.status, response.data);
-				})
-				.finally(function() {
-					console.log("finally finished gists");
+					$scope.orderSent = true;
 				});
 		}
 	};
