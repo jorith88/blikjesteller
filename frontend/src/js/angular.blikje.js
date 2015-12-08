@@ -19,7 +19,7 @@ app.controller('blikjeCtrl', ['$scope', '$http', function($scope, $http) {
 	$scope.plusOne = function(blikje) {
 		blikje.amount += 1;
 		updateTotal();
-	};	
+	};
 
 	$scope.minusOne = function(blikje) {
 		if (blikje.amount > 0) {
@@ -30,16 +30,16 @@ app.controller('blikjeCtrl', ['$scope', '$http', function($scope, $http) {
 
 	$scope.sendOrder = function() {
 		var confirmed = confirm('Bestelling verzenden?');
-		
+
 		if (confirmed) {
 			var order = {};
-			
+
 			angular.forEach($scope.blikjes, function(blikje) {
 				if (blikje.amount > 0) {
 					order[blikje.id] = blikje.amount;
 				}
 			});
-			
+
 			$http.post('/api/blikjesteller/send-order', order)
 				.then(function(response) {
 					$scope.orderSent = true;
@@ -50,9 +50,11 @@ app.controller('blikjeCtrl', ['$scope', '$http', function($scope, $http) {
 	function updateTotal() {
 		$scope.stateChanged = true;
 		var totalAmount = 0;
+
 		angular.forEach($scope.blikjes, function(blikje) {
 		  totalAmount += (blikje.price * blikje.amount);
 		});
+
 		$scope.totalAmount = totalAmount;
 		$scope.orderSent = false;
 	}
