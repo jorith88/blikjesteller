@@ -18,6 +18,16 @@ public class Blikje {
 		return blikje;
 	}
 
+	public static Blikje fromContentlet(Contentlet c, Integer amount) {
+		Blikje blikje = new Blikje();
+		blikje.setId(c.getIdentifier());
+		blikje.setName(c.getStringProperty("naam"));
+		blikje.setPrice(c.getFloatProperty("prijs"));
+		blikje.setAmount(amount);
+
+		return blikje;
+	}
+
 	public String getId() {
 		return id;
 	}

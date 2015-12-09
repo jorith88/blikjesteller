@@ -35,7 +35,7 @@ public class BlikjesFacade {
 		return query.executeSafe()
 				.stream()
 				.filter(contentlet -> order.get(contentlet.getIdentifier()) > 0) // ordered amount is greater than 0
-				.map(Blikje::fromContentlet)
+				.map(contentlet -> Blikje.fromContentlet(contentlet, order.get(contentlet.getIdentifier())))
 				.collect(Collectors.toList());
 	}
 }
