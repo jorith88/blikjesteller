@@ -1,4 +1,4 @@
-package nl.jorith.dotcms.blikjesteller.email;
+package nl.jorith.dotcms.blikjesteller.facade;
 
 import java.text.NumberFormat;
 import java.util.List;

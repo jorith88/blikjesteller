@@ -20,8 +20,8 @@ import com.dotmarketing.portlets.contentlet.model.Contentlet;
 import com.dotmarketing.util.Logger;
 import com.google.gson.reflect.TypeToken;
 
-import nl.jorith.dotcms.blikjesteller.email.BlikjesFacade;
-import nl.jorith.dotcms.blikjesteller.email.EmailFacade;
+import nl.jorith.dotcms.blikjesteller.facade.BlikjesFacade;
+import nl.jorith.dotcms.blikjesteller.facade.EmailFacade;
 import nl.jorith.dotcms.blikjesteller.rest.type.Blikje;
 import nl.jorith.dotcms.blikjesteller.util.ContentletQuery;
 

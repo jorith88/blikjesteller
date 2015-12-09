@@ -1,11 +1,23 @@
 package nl.jorith.dotcms.blikjesteller.rest.type;
 
+import com.dotmarketing.portlets.contentlet.model.Contentlet;
+
 public class Blikje {
 	private String id;
 	private String name;
 	private Float price;
 	private Integer amount;
-	
+
+	public static Blikje fromContentlet(Contentlet c) {
+		Blikje blikje = new Blikje();
+		blikje.setId(c.getIdentifier());
+		blikje.setName(c.getStringProperty("naam"));
+		blikje.setPrice(c.getFloatProperty("prijs"));
+		blikje.setAmount(0);
+
+		return blikje;
+	}
+
 	public String getId() {
 		return id;
 	}
