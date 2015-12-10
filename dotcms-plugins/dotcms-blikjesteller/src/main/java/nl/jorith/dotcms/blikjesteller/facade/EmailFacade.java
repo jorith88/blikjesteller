@@ -61,7 +61,6 @@ public class EmailFacade {
         try {
 			fromAddress = new InternetAddress(from);
 
-
 			msg.setFrom(fromAddress);
 
 			msg.addRecipient(RecipientType.TO, new InternetAddress(to));
