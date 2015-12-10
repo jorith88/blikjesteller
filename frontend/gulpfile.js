@@ -31,7 +31,7 @@ gulp.task('scripts', function() {
     return gulp.src(js_src)
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(concat('script.js'))
-        //.pipe(uglify({ output: { ascii_only: true } }))
+        .pipe(uglify({ output: { ascii_only: true } }))
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(target + '/global/js/'));
 });

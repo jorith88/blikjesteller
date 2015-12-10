@@ -37,12 +37,12 @@
 				</div>
 			</div>
 		
-			<div class="row" ng-show="blikjes">
+			<div class="row row-total" ng-show="blikjes">
 				<div class="col-xs-4 col-md-4"><strong>Totaal</strong></div>
 				<div class="col-xs-1"><strong>{{totalAmount | currency:"&euro;"}}</strong></div>
 			</div>
 		
-			<div class="row" ng-show="blikjes && isOrderTime()">
+			<div class="row row-order" ng-show="blikjes && isOrderTime()">
 				<div class="col-xs-12">
 					<button type="button" class="btn btn-primary btn-lg" ng-click="sendOrder()" ng-disabled="orderSent || totalAmount == 0">Bestellen</button>
 					<!--<div style="display: inline;" ng-show="orderSent">Bestelling verzonden!</div>-->

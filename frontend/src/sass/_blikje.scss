@@ -5,7 +5,7 @@ body {
 
 .btn-plusminus {
 	color: #009DDC;
-	//border: none;
+	border: none;
 	background-color: #F5F5F5;
 	font-weight:bold;
 	font-size:21px;
@@ -20,6 +20,14 @@ body {
 	border-bottom: 1px solid #ddd;
 	padding: 10px 5px 5px 0;
 	height: 60px;
+}
+
+.row-total {
+	border:none;
+}
+
+.row-order {
+	padding-top:0px;
 }
 
 .row span,
