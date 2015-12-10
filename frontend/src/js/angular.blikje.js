@@ -3,7 +3,7 @@ var app = angular.module('blikje', []);
 app.controller('blikjeCtrl', ['$scope', '$http', function($scope, $http) {
 	$scope.stateChanged = false;
 	$scope.totalAmount = 0;
-
+	
 	$http.get('/api/blikjesteller/blikjes').success(function(data) {
 		$scope.blikjes = data;
 	});
@@ -27,7 +27,19 @@ app.controller('blikjeCtrl', ['$scope', '$http', function($scope, $http) {
 			updateTotal();
 		}
 	};
-
+	
+	$scope.isOrderTime = function() {
+		var now = new Date();
+		
+		var orderDay 		= 5;
+		var orderStartHour 	= 0;
+		var orderEndHour 	= 1;
+		
+		return now.getDay() == orderDay
+			&& now.getHours() >= orderStartHour
+			&& now.getHours() <= orderEndHour;
+	}
+	
 	$scope.sendOrder = function() {
 		var confirmed = confirm('Bestelling verzenden?');
 

@@ -1,12 +1,16 @@
-.btn-primary {
-	background-color: #009DDC;
-	border: none;
+body {
+	background-color: #F5F5F5;
+	font-family: "Open Sans", Arial, Helvetica, sans-serif
+}
+.btn-plusminus {
+	color: #009DDC;
+	//border: none;
+	background-color: #F5F5F5;
+	font-weight:bold;
 }
 
 .row {
-	margin-top:12px;
-	background-color: #f8f8f8;
-	border: 1px solid #f2f2f2;
+	border-bottom: 1px solid #ddd;
 	padding: 5px 5px 5px 0;
 }
 

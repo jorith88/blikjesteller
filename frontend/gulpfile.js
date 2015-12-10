@@ -31,8 +31,7 @@ gulp.task('scripts', function() {
     return gulp.src(js_src)
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(concat('script.js'))
-        .pipe(stripDebug())
-        .pipe(uglify({ output: { ascii_only: true } }))
+        //.pipe(uglify({ output: { ascii_only: true } }))
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(target + '/global/js/'));
 });
@@ -51,8 +50,7 @@ gulp.task('sass', function () {
 });
 
 gulp.task('default',['sass','scripts', 'assets'], function(){
-    //gulp.watch(sass_src, ['sass']);
-    //gulp.watch(js_base_src, ['scripts']);
-    //gulp.watch(js_ie9_src, ['scripts_ie9']);
-    //gulp.watch(assets_src, ['assets']);
+    gulp.watch(sass_src, ['sass']);
+    gulp.watch(js_src, ['scripts']);
+    gulp.watch(assets_src, ['assets']);
 });
