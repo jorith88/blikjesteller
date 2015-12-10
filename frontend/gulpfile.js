@@ -49,8 +49,11 @@ gulp.task('sass', function () {
         .pipe(gulp.dest(target + '/global/css/'));
 });
 
-gulp.task('default',['sass','scripts', 'assets'], function(){
+gulp.task('watch',['sass','scripts', 'assets'], function(){
     gulp.watch(sass_src, ['sass']);
     gulp.watch(js_src, ['scripts']);
     gulp.watch(assets_src, ['assets']);
 });
+
+
+gulp.task('default',['sass','scripts', 'assets'], function(){});
