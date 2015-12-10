@@ -28,12 +28,12 @@
 			<div class="row" ng-repeat="blikje in blikjes">
 				<div class="col-xs-4 col-md-4"><span>{{blikje.name}}</span></div>
 				<div class="col-xs-2"><span>{{blikje.price | currency:"&euro;"}}</span></div>
-				<div class="col-xs-2"><input type="text" value="{{blikje.amount}}" readonly /></div>
+				<div class="col-xs-2"><input type="text" class="form-control" value="{{blikje.amount}}" readonly /></div>
 				<div class="col-xs-2">
 					<button type="button" class="btn btn-lg btn-plusminus" ng-click="plusOne(blikje)">+</button>
 				</div>
 				<div class="col-xs-2">
-					<button type="button" class="btn btn-lg btn-plusminus" ng-click="minusOne(blikje)">-</button>
+					<button type="button" class="btn btn-lg btn-plusminus" ng-click="minusOne(blikje)">&ndash;</button>
 				</div>
 			</div>
 		
@@ -45,7 +45,7 @@
 			<div class="row" ng-show="blikjes && isOrderTime()">
 				<div class="col-xs-12">
 					<button type="button" class="btn btn-primary btn-lg" ng-click="sendOrder()" ng-disabled="orderSent || totalAmount == 0">Bestellen</button>
-					<div style="display: inline;" ng-show="orderSent">Bestelling verzonden!</div>
+					<!--<div style="display: inline;" ng-show="orderSent">Bestelling verzonden!</div>-->
 				</div>
 			</div>
 		</div>
