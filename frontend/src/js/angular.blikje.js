@@ -32,8 +32,8 @@ app.controller('blikjeCtrl', ['$scope', '$http', function($scope, $http) {
 		var now = new Date();
 		
 		var orderDay 		= 5;
-		var orderStartHour 	= 0;
-		var orderEndHour 	= 1;
+		var orderStartHour 	= 12;
+		var orderEndHour 	= 18;
 		
 		return now.getDay() == orderDay
 			&& now.getHours() >= orderStartHour
