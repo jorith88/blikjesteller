@@ -6,6 +6,11 @@ body {
 .container {
 	margin-top: $sticky-header-height-xs;
 }
+
+.container-fluid {
+	padding-right: 5px;	
+}
+
 .btn-plusminus {
 	color: #009DDC;
 	border: none;
@@ -49,4 +54,18 @@ body {
 	background-color: #009DDC;
 	padding: 10px 10px;
 	border-radius: 5px;
+}
+
+.fa-plus:before,
+.fa-minus:before {
+	font-size:16px;
+}
+
+.fa-paper-plane-o:before {
+	font-size: 21px;
+}
+
+.btn-send-order {
+	background-color: darken(#009DDC, 8) !important;
+	border: 1px solid white;
 }

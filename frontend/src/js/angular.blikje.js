@@ -34,7 +34,7 @@ app.controller('blikjeCtrl', ['$scope', '$http', function($scope, $http) {
 		var orderDay 		= 5;
 		var orderStartHour 	= 12;
 		var orderEndHour 	= 18;
-		
+
 		return now.getDay() == orderDay
 			&& now.getHours() >= orderStartHour
 			&& now.getHours() <= orderEndHour;
@@ -54,7 +54,7 @@ app.controller('blikjeCtrl', ['$scope', '$http', function($scope, $http) {
 
 			$http.post('/api/blikjesteller/send-order', order)
 				.then(function(response) {
-					alert('Bestelling verzonden!');
+					alert('Verzonden!');
 					$scope.orderSent = true;
 				});
 		}

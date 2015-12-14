@@ -12,43 +12,44 @@
 
 		<link rel="stylesheet" href="global/css/base.css"/>
 		<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
 		<script src="global/js/script.js"></script>
 	</head>
-	<body>
+	<body ng-app="blikje" ng-controller="blikjeCtrl">
 		<div id="content" class="offcanvas-content clearfix">
 			<header>
 				<div class="container-fluid">
 					<div class="header-title">
 						<h1>Blikjesteller</h1>
 					</div>
+					<div class="clearfix">
+						<div class="pull-right">
+							<button type="button" class="btn btn-large btn-send-order" ng-click="sendOrder()" ng-disabled="orderSent || totalAmount == 0 || !isOrderTime()" ng-show="blikjes">
+								<i class="fa fa-paper-plane-o"></i>
+							</button>
+						</div>
+					</div>
 				</div>
 			</header>
 		</div>
-		<div class="container ng-cloak" ng-app="blikje" ng-controller="blikjeCtrl">
+		<div class="container ng-cloak">
 
 			<div class="row vertical-align" ng-repeat="blikje in blikjes">
 				<div class="col-xs-4 col-md-4"><span>{{blikje.name}}</span></div>
 				<div class="col-xs-2"><span>{{blikje.price | currency:"&euro;"}}</span></div>
 				<div class="col-xs-2"><span class="badge">{{blikje.amount}}</span></div>
 				<div class="col-xs-2">
-					<button type="button" class="btn btn-lg btn-plusminus" ng-click="plusOne(blikje)">+</button>
+					<button type="button" class="btn btn-lg btn-plusminus" ng-click="plusOne(blikje)"><i class="fa fa-plus"></i></button>
 				</div>
 				<div class="col-xs-2">
-					<button type="button" class="btn btn-lg btn-plusminus" ng-click="minusOne(blikje)">&ndash;</button>
+					<button type="button" class="btn btn-lg btn-plusminus" ng-click="minusOne(blikje)"><i class="fa fa-minus"></i></button>
 				</div>
 			</div>
 
-			<div class="row row-total" ng-show="blikjes">
+			<div class="row row-total vertical-align" ng-show="blikjes">
 				<div class="col-xs-4 col-md-4"><strong>Totaal</strong></div>
 				<div class="col-xs-1"><strong>{{totalAmount | currency:"&euro;"}}</strong></div>
-			</div>
-
-			<div class="row row-order" ng-show="blikjes && isOrderTime()">
-				<div class="col-xs-12">
-					<button type="button" class="btn btn-primary btn-lg" ng-click="sendOrder()" ng-disabled="orderSent || totalAmount == 0">Bestellen</button>
-					<!--<div style="display: inline;" ng-show="orderSent">Bestelling verzonden!</div>-->
-				</div>
 			</div>
 		</div>
 
