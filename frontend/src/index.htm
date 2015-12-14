@@ -3,7 +3,9 @@
 	<head>
 		<title>Blikjesteller</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
 		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
 		<link rel="shortcut icon" type="image/x-icon" href="global/img/blikjecola.jpg" />
 		<link rel="apple-touch-icon" href="global/img/blikjecola.jpg" />
@@ -36,12 +38,12 @@
 					<button type="button" class="btn btn-lg btn-plusminus" ng-click="minusOne(blikje)">&ndash;</button>
 				</div>
 			</div>
-		
+
 			<div class="row row-total" ng-show="blikjes">
 				<div class="col-xs-4 col-md-4"><strong>Totaal</strong></div>
 				<div class="col-xs-1"><strong>{{totalAmount | currency:"&euro;"}}</strong></div>
 			</div>
-		
+
 			<div class="row row-order" ng-show="blikjes && isOrderTime()">
 				<div class="col-xs-12">
 					<button type="button" class="btn btn-primary btn-lg" ng-click="sendOrder()" ng-disabled="orderSent || totalAmount == 0">Bestellen</button>
