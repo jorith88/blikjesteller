@@ -1,6 +1,6 @@
 header {
   border-bottom:1px solid #009DDC;;
-  position:relative; //static header gives issues with offcanvas menua, for example on IE
+  position:fixed;
   height: $sticky-header-height-xs;
   width:100%;
   background-color: #009DDC;;

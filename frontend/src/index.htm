@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 
 		<link rel="shortcut icon" type="image/x-icon" href="global/img/blikjecola.jpg" />
 		<link rel="apple-touch-icon" href="global/img/blikjecola.jpg" />
@@ -27,10 +27,10 @@
 		</div>
 		<div class="container ng-cloak" ng-app="blikje" ng-controller="blikjeCtrl">
 
-			<div class="row" ng-repeat="blikje in blikjes">
+			<div class="row vertical-align" ng-repeat="blikje in blikjes">
 				<div class="col-xs-4 col-md-4"><span>{{blikje.name}}</span></div>
 				<div class="col-xs-2"><span>{{blikje.price | currency:"&euro;"}}</span></div>
-				<div class="col-xs-2"><input type="text" class="form-control" value="{{blikje.amount}}" readonly /></div>
+				<div class="col-xs-2"><span class="badge">{{blikje.amount}}</span></div>
 				<div class="col-xs-2">
 					<button type="button" class="btn btn-lg btn-plusminus" ng-click="plusOne(blikje)">+</button>
 				</div>
