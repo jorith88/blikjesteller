@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<widget id="nl.isaac.qander.dealerapp" version="{{appVersion}}" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" >
+    <name>Blikjesteller</name>
+    <description>Blikjesteller</description>
+
+    <icon src="www/global/img/blikjecola.png" />
+
+    <platform name="ios">
+        <preference name="orientation" value="all" />
+        <preference name="BackupWebStorage" value="local"/>
+
+		<!--
+        <splash src="../resources/splash-screen/Default~iphone.png" width="320" height="480" />
+        <splash src="../resources/splash-screen/Default@2x~iphone.png" width="640" height="960" />
+        <splash src="../resources/splash-screen/Default-Portrait~ipad.png" width="768" height="1024" />
+        <splash src="../resources/splash-screen/Default-Portrait@2x~ipad.png" width="1536" height="2048" />
+        <splash src="../resources/splash-screen/Default-Landscape~ipad.png" width="1024" height="768" />
+        <splash src="../resources/splash-screen/Default-Landscape@2x~ipad.png" width="2048" height="1536" />
+        <splash src="../resources/splash-screen/Default-568h@2x~iphone.png" width="640" height="1136" />
+        <splash src="../resources/splash-screen/Default-667h.png" width="750" height="1334" />
+        <splash src="../resources/splash-screen/Default-736h.png" width="1242" height="2208" />
+        <splash src="../resources/splash-screen/Default-Landscape-736h.png" width="2208" height="1242" />
+		-->
+
+    </platform>
+
+    <access origin="*" />
+    <allow-navigation href="http://*/*" />
+    <allow-navigation href="https://*/*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="tel:*" />
+
+    <content src="index.htm" />
+
+    <preference name="DisallowOverscroll" value="true"/>
+    <preference name="StatusBarOverlaysWebView" value="false" />
+
+    <platform name="android">
+        <preference name="StatusBarBackgroundColor" value="#0080B3" />
+    </platform>
+     <platform name="ios">
+        <preference name="StatusBarBackgroundColor" value="#009DDC" />
+    </platform>
+</widget>
