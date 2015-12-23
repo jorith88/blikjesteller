@@ -93,7 +93,7 @@
 								<resource>
 									<targetPath>/</targetPath>
 									<directory>${project.build.directory}</directory>
-									<include>${project.artifactId}.ear</include>
+									<include>${project.artifactId}-${project.version}.war</include>
 								</resource>
 							</resources>
 						</configuration>
