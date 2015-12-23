@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Blikjesteller</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="shortcut icon" type="image/x-icon" href="global/img/blikjecola.png" />
+		<link rel="apple-touch-icon" href="global/img/blikjecola.png" />
+
+		<link rel="stylesheet" href="global/css/base.css"/>
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+		<script src="global/js/script.js"></script>
+	</head>
+	<body ng-app="blikje" ng-controller="blikjeCtrl">
+		<div id="content" class="offcanvas-content clearfix">
+			<header>
+				<div class="container-fluid">
+					<div class="header-title">
+						<h1>Blikjesteller</h1>
+					</div>
+					<div class="clearfix">
+						<div class="pull-right">
+							<button type="button" class="btn btn-large btn-send-order" ng-click="sendOrder()" ng-disabled="orderSent || totalAmount == 0" ng-show="blikjes">
+								<i class="fa fa-paper-plane-o"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</header>
+		</div>
+		<div class="container ng-cloak">
+
+			<div class="row vertical-align" ng-repeat="blikje in blikjes">
+				<div class="col-xs-4 col-md-4"><span>{{blikje.name}}</span></div>
+				<div class="col-xs-2"><span>{{blikje.price | currency:"&euro;"}}</span></div>
+				<div class="col-xs-2"><span class="badge">{{blikje.amount}}</span></div>
+				<div class="col-xs-2">
+					<button type="button" class="btn btn-lg btn-plusminus" ng-click="plusOne(blikje)"><i class="fa fa-plus"></i></button>
+				</div>
+				<div class="col-xs-2">
+					<button type="button" class="btn btn-lg btn-plusminus" ng-click="minusOne(blikje)"><i class="fa fa-minus"></i></button>
+				</div>
+			</div>
+
+			<div class="row row-total vertical-align" ng-show="blikjes">
+				<div class="col-xs-4 col-md-4"><strong>Totaal</strong></div>
+				<div class="col-xs-1"><strong>{{totalAmount | currency:"&euro;"}}</strong></div>
+			</div>
+		</div>
+
+		<script>
+			 angular.element(document).ready(function () {
+				FastClick.attach(document.body);
+			});
+		</script>
+	</body>
+</html>

@@ -1,5 +1,5 @@
-var source = "./src";
-var target = "./target";
+var source = "./src/main/frontend";
+var target = "./src/main/webapp";
 
 var gulp = require('gulp');
 var changed = require('gulp-changed');

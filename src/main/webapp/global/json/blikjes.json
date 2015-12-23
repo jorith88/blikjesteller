@@ -1,0 +1,9 @@
+[
+	{"id":"7a90c3e3-9a74-47b8-b9fa-da21de9c3d80","name":"Coca Cola","price":0.7,"amount":0},
+	{"id":"37d30ffb-51fb-4aa3-ae49-d52213ffa2ac","name":"Coca Cola Zero","price":0.7,"amount":0},
+	{"id":"c14cbc37-e628-4a11-b56a-f0147dcda5ba","name":"Fanta Orange","price":0.7,"amount":0},
+	{"id":"dc2c7bfa-c69e-4189-ae0b-038e93d3f6ad","name":"Hero Cassis","price":0.8,"amount":0},
+	{"id":"46488a49-8fb4-430a-83da-dbd02d452b03","name":"Lipton Ice Tea","price":0.8,"amount":0},
+	{"id":"0965c312-af92-43a8-8e18-ec3b5590cc49","name":"Minute Maid","price":1.0,"amount":0},
+	{"id":"328a3af5-c211-45fd-862e-3870a833d37d","name":"Spa Rood","price":0.7,"amount":0}
+]
