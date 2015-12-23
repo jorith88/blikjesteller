@@ -1,0 +1,41 @@
+{
+	"orderEmail": "jorith@gmail.com",
+	"orderEmailBcc": "jorith@isaac.nl",
+	"blikjes": [
+		{
+			"id": 1,
+			"name": "Coca Cola",
+			"price": 0.7
+		},
+		{
+			"id": 2,
+			"name": "Coca Cola Zero",
+			"price": 0.7
+		},
+		{
+			"id": 3,
+			"name": "Fanta Orange",
+			"price": 0.7
+		},
+		{
+			"id": 4,
+			"name": "Hero Cassis",
+			"price": 0.8
+		},
+		{
+			"id": 5,
+			"name": "Lipton Ice Tea",
+			"price": 0.8
+		},
+		{
+			"id": 6,
+			"name": "Minute Maid",
+			"price": 1.0
+		},
+		{
+			"id": 7,
+			"name": "Spa Rood",
+			"price": 0.7
+		}
+	]
+}

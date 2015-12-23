@@ -4,7 +4,7 @@ app.controller('blikjeCtrl', ['$scope', '$http', function($scope, $http) {
 	$scope.stateChanged = false;
 	$scope.totalAmount = 0;
 	
-	$http.get('/global/json/blikjes.json').success(function(data) {
+	$http.get('/rest/blikjesteller/blikjes').success(function(data) {
 		$scope.blikjes = data;
 	});
 
@@ -52,7 +52,7 @@ app.controller('blikjeCtrl', ['$scope', '$http', function($scope, $http) {
 				}
 			});
 
-			$http.post('/api/blikjesteller/send-order', order)
+			$http.post('/rest/blikjesteller/send-order', order)
 				.then(function(response) {
 					alert('Verzonden!');
 					$scope.orderSent = true;
