@@ -3,6 +3,8 @@ var app = angular.module('blikje', []);
 app.controller('blikjeCtrl', ['$scope', '$http', function($scope, $http) {
 	$scope.stateChanged = false;
 	$scope.totalAmount = 0;
+    
+    alert('test!');
 	
 	$http.get('/rest/blikjesteller/blikjes').success(function(data) {
 		$scope.blikjes = data;
