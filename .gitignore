@@ -4,3 +4,5 @@ target
 .project
 .classpath
 .tern-project
+src/main/webapp/global
+src/main/webapp/index.htm
