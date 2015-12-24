@@ -12,20 +12,22 @@ public class Configuration {
 	private static final Gson GSON = new Gson();
 	private static final Logger LOGGER = Logger.getLogger(Configuration.class.getName()); 
 	
+	private static ApplicationConfig applicationConfig;
+
 	public static ApplicationConfig getApplicationConfig() {
-		
-		ApplicationConfig applicationConfig;
-		try (
-				InputStream in = Configuration.class.getResourceAsStream("/ApplicationConfig.json");
-				InputStreamReader reader = new InputStreamReader(in);
-		) {
-			applicationConfig = GSON.fromJson(reader, ApplicationConfig.class);
-			
-		} catch (IOException e) {
-			LOGGER.log(Level.SEVERE, "Error while loading configuration", e);
-			throw new RuntimeException(e);
+
+		if (applicationConfig == null) {
+			try (InputStream in = Configuration.class.getResourceAsStream("/ApplicationConfig.json");
+				 InputStreamReader reader = new InputStreamReader(in);) {
+
+				applicationConfig = GSON.fromJson(reader, ApplicationConfig.class);
+
+			} catch (IOException e) {
+				LOGGER.log(Level.SEVERE, "Error while loading configuration", e);
+				throw new RuntimeException(e);
+			}
 		}
-		
+
 		return applicationConfig;
 	}
 }

@@ -20,6 +20,7 @@ public class BlikjesFacade {
 	}
 
 	public List<Blikje> getOrderedBlikjes(Map<String,Integer> order) {
+
 		return applicationConfig.getBlikjes().stream()
 			.filter (blikje -> order.keySet().contains(blikje.getId())) // Only get blikjes that are ordered
 			.filter (blikje -> order.get(blikje.getId()) > 0) // Only get blikjes that have an amount > 0

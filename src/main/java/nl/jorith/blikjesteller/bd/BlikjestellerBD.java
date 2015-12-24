@@ -27,8 +27,8 @@ import nl.jorith.blikjesteller.facade.EmailFacade;
 @Produces(MediaType.APPLICATION_JSON)
 public class BlikjestellerBD {
 
-	private static final Logger LOGGER = Logger.getLogger(Configuration.class.getName());
 	private static final String TOKEN_KEY = "nl.jorith.blikjesteller.token";
+	private static final Logger LOGGER = Logger.getLogger(Configuration.class.getName());
 	
 	private static final EmailFacade emailFacade = new EmailFacade();
 	private static final BlikjesFacade blikjesFacade = new BlikjesFacade();
@@ -46,9 +46,9 @@ public class BlikjestellerBD {
 	public void sendOrder(Map<String, Integer> order, @Context HttpServletRequest request) {
 		
 		long numberOfNotZeroBlikjes = order.values()
-									.stream()
-									.filter(i -> i > 0)
-									.count();
+				.stream()
+				.filter(i -> i > 0)
+				.count();
 		
 		// We don't accept empty orders
 		if (numberOfNotZeroBlikjes == 0) {
