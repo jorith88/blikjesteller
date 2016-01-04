@@ -9,6 +9,7 @@ var uglify = require('gulp-uglify');
 var watch = require('gulp-watch');
 var sourcemaps = require('gulp-sourcemaps');
 var sass = require('gulp-sass');
+var del = require('del');
 
 var js_src = [
     'node_modules/angular/angular.min.js',
@@ -55,5 +56,9 @@ gulp.task('watch',['sass','scripts', 'assets'], function(){
     gulp.watch(assets_src, ['assets']);
 });
 
+gulp.task('clean', function() {
+    del.sync(target + '/index.htm');
+    del.sync(target + '/global');
+});
 
-gulp.task('default',['sass','scripts', 'assets'], function(){});
+gulp.task('default',['clean','sass','scripts', 'assets'], function(){});
