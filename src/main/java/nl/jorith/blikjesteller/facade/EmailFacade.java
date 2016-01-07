@@ -1,9 +1,10 @@
 package nl.jorith.blikjesteller.facade;
 
-import java.text.NumberFormat;
+import java.io.IOException;
+import java.io.StringWriter;
 import java.util.List;
-import java.util.Locale;
 import java.util.Properties;
+import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,6 +16,14 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.VelocityEngine;
+import org.apache.velocity.runtime.RuntimeConstants;
+import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
+import org.apache.velocity.tools.generic.MathTool;
+import org.apache.velocity.tools.generic.NumberTool;
+
 import nl.jorith.blikjesteller.bd.type.Blikje;
 import nl.jorith.blikjesteller.config.ApplicationConfig;
 import nl.jorith.blikjesteller.config.Configuration;
@@ -23,36 +32,21 @@ public class EmailFacade {
 	private static final Logger LOGGER = Logger.getLogger(EmailFacade.class.getName());
 	
 	public void sendBlikjesOrder(List<Blikje> blikjes, boolean debugMode) {
-		StringBuilder mailBody = new StringBuilder();
-		Locale locale = new Locale("nl", "NL");
-	    NumberFormat nf = NumberFormat.getNumberInstance(locale);
-	    nf.setMinimumFractionDigits(2);
-	    nf.setMaximumFractionDigits(2);
 
-		mailBody.append("<h3>Bestelling</h3>\n");
-
-		mailBody.append("<table>\n");
-		float totalPrice = 0;
-		for (Blikje blikje : blikjes) {
-			if (blikje.getAmount() > 0) {
-				totalPrice += (blikje.getPrice() * blikje.getAmount());
-				mailBody.append(String.format("<tr><td width=\"140px\">%s</td><td width=\"70px\">&euro; %s</td><td width=\"50px\">%s</td><td>&euro; %s</td></tr>\n", blikje.getName(), nf.format(blikje.getPrice()), blikje.getAmount(), nf.format(blikje.getAmount() * blikje.getPrice())));
-			}
-		}
-
-		mailBody.append("<tr><td colspan=\"4\">&nbsp;</td></tr>\n");
-		mailBody.append(String.format("<tr><td colspan=\"3\"><strong>Totaal</strong></td><td><strong>&euro; %s</strong></td></tr>\n", nf.format(totalPrice)));
+		String mailBody = getEmailBody("order", velocityContext -> {
+			velocityContext.put("blikjes", blikjes);
+	    });
 
 		ApplicationConfig applicationConfig = Configuration.getApplicationConfig();
-		
+
 		String emailTo = debugMode ?
 				applicationConfig.getDebugOrderEmail() : applicationConfig.getOrderEmail();
-		
+
 		String emailBcc = applicationConfig.getOrderEmailBcc();
 
 		LOGGER.log(Level.INFO, "Send blikjes order to " + emailTo + ". BCC to " + emailBcc);
 
-		sendMail(emailTo, emailBcc, "blikje@jorith.nl", "Blikjesbestelling", mailBody.toString());
+		sendMail(emailTo, emailBcc, "blikje@jorith.nl", "Blikjesbestelling", mailBody);
 	}
 
 	private void sendMail(String to, String bcc, String from, String subject, String message) {
@@ -81,6 +75,37 @@ public class EmailFacade {
 			LOGGER.log(Level.SEVERE, "Error Sending Message", e);
 			throw new RuntimeException(e);
 		}
+	}
 
+	private String getEmailBody(String templateName, Consumer<VelocityContext> setupVelocityContext) {
+
+		VelocityEngine ve = new VelocityEngine();
+		ve.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
+		ve.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
+		ve.init();
+
+		VelocityContext context = new VelocityContext();
+
+		// First, add some generic viewtools
+		context.put("numberTool", new NumberTool());
+		context.put("mathTool", new MathTool());
+
+		// Then, dynamically add additional objects to the context
+		setupVelocityContext.accept(context);
+
+		Template template = ve.getTemplate( "/email-templates/" + templateName + ".vtl" );
+
+		String emailBody;
+		try (StringWriter writer = new StringWriter()) {
+
+			template.merge( context, writer );
+			emailBody = writer.toString();
+
+		} catch (IOException e) {
+			LOGGER.log(Level.SEVERE, "Error while merging Velocity template", e);
+			throw new RuntimeException(e);
+		}
+
+		return emailBody;
 	}
 }

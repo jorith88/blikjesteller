@@ -17,7 +17,7 @@ public class Configuration {
 	public static ApplicationConfig getApplicationConfig() {
 
 		if (applicationConfig == null) {
-			try (InputStream in = Configuration.class.getResourceAsStream("/ApplicationConfig.json");
+			try (InputStream in = Configuration.class.getResourceAsStream("/config/ApplicationConfig.json");
 				 InputStreamReader reader = new InputStreamReader(in);) {
 
 				applicationConfig = GSON.fromJson(reader, ApplicationConfig.class);
