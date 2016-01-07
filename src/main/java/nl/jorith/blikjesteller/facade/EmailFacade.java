@@ -22,7 +22,7 @@ import nl.jorith.blikjesteller.config.Configuration;
 public class EmailFacade {
 	private static final Logger LOGGER = Logger.getLogger(EmailFacade.class.getName());
 	
-	public void sendBlikjesOrder(List<Blikje> blikjes) {
+	public void sendBlikjesOrder(List<Blikje> blikjes, boolean debugMode) {
 		StringBuilder mailBody = new StringBuilder();
 		Locale locale = new Locale("nl", "NL");
 	    NumberFormat nf = NumberFormat.getNumberInstance(locale);
@@ -44,7 +44,10 @@ public class EmailFacade {
 		mailBody.append(String.format("<tr><td colspan=\"3\"><strong>Totaal</strong></td><td><strong>&euro; %s</strong></td></tr>\n", nf.format(totalPrice)));
 
 		ApplicationConfig applicationConfig = Configuration.getApplicationConfig();
-		String emailTo = applicationConfig.getOrderEmail();
+		
+		String emailTo = debugMode ?
+				applicationConfig.getDebugOrderEmail() : applicationConfig.getOrderEmail();
+		
 		String emailBcc = applicationConfig.getOrderEmailBcc();
 
 		LOGGER.log(Level.INFO, "Send blikjes order to " + emailTo + ". BCC to " + emailBcc);

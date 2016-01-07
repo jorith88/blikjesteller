@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -34,8 +35,7 @@ public class BlikjestellerBD {
 	private static final BlikjesFacade blikjesFacade = new BlikjesFacade();
 	
 	@GET @Path("/blikjes")
-	public List<Blikje> getBlikjes(@Context HttpServletRequest request) {
-		
+	public List<Blikje> getBlikjes(@Context HttpServletRequest request, @HeaderParam("Debug") boolean debugMode) {
 		// Set a token to prevent calls to /send-order only
 		request.getSession().setAttribute(TOKEN_KEY, UUID.randomUUID().toString());
 
@@ -43,8 +43,8 @@ public class BlikjestellerBD {
 	}
 
 	@POST @Path("send-order")
-	public void sendOrder(Map<String, Integer> order, @Context HttpServletRequest request) {
-		
+	public void sendOrder(Map<String, Integer> order, @Context HttpServletRequest request, @HeaderParam("Debug") boolean debugMode) {
+
 		long numberOfNotZeroBlikjes = order.values()
 				.stream()
 				.filter(i -> i > 0)
@@ -65,6 +65,6 @@ public class BlikjestellerBD {
 		
 		List<Blikje> orderedBlikjes = blikjesFacade.getOrderedBlikjes(order);
 		
-		emailFacade.sendBlikjesOrder(orderedBlikjes);
+		emailFacade.sendBlikjesOrder(orderedBlikjes, debugMode);
 	}
 }

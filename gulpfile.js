@@ -15,6 +15,7 @@ var js_src = [
     'node_modules/angular/angular.min.js',
     'node_modules/bootstrap/js/bootstrap.min.js',
     'node_modules/fastclick/lib/fastclick.js',
+    source + '/js/utility.js',
     source + '/js/angular.blikje.js'
 ]
 
@@ -50,7 +51,7 @@ gulp.task('sass', function () {
         .pipe(gulp.dest(target + '/global/css/'));
 });
 
-gulp.task('watch',['sass','scripts', 'assets'], function(){
+gulp.task('watch',['clean', 'sass','scripts', 'assets'], function(){
     gulp.watch(sass_src, ['sass']);
     gulp.watch(js_src, ['scripts']);
     gulp.watch(assets_src, ['assets']);
