@@ -59,6 +59,10 @@ app.controller('blikjeCtrl', ['$scope', '$http', function($scope, $http) {
 				.then(function(response) {
 					alert('Verzonden!');
 					$scope.orderSent = true;
+					
+				}, function errorCallback(response) {
+				   console.log(response);
+				   alert('Bestelling kon niet worden verzonden.');
 				});
 		}
 	};
