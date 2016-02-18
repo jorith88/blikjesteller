@@ -73,6 +73,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>${project.artifactId}</finalName>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<plugins>
 			<plugin>
@@ -136,7 +137,7 @@
 								<resource>
 									<targetPath>/</targetPath>
 									<directory>${project.build.directory}</directory>
-									<include>${project.artifactId}-${project.version}.war</include>
+									<include>${project.artifactId}.war</include>
 								</resource>
 							</resources>
 						</configuration>
