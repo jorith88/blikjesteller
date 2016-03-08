@@ -19,6 +19,22 @@ public class ConfigTest {
 		Assert.assertTrue("Order email address must be set", StringUtils.isNotBlank(appConfig.getOrderEmail()));
 	}
 	
+	
+	@Test
+	public void checkOrderEmailBcc() {
+		ApplicationConfig appConfig = Configuration.getApplicationConfig();
+		
+		Assert.assertTrue("Order email BCC address must be set", StringUtils.isNotBlank(appConfig.getOrderEmailBcc()));
+	}
+	
+	
+	@Test
+	public void checkDebugOrderEmail() {
+		ApplicationConfig appConfig = Configuration.getApplicationConfig();
+		
+		Assert.assertTrue("Debug order email address must be set", StringUtils.isNotBlank(appConfig.getDebugOrderEmail()));
+	}
+	
 	@Test
 	public void checkBlikjesConfig() {
 		ApplicationConfig appConfig = Configuration.getApplicationConfig();
