@@ -2,7 +2,7 @@ package nl.jorith.blikjesteller.config;
 
 import java.util.List;
 
-import nl.jorith.blikjesteller.bd.type.Blikje;
+import nl.jorith.blikjesteller.rest.type.Blikje;
 
 public class ApplicationConfig {
 	private String orderEmail;

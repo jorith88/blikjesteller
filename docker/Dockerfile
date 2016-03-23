@@ -1,4 +1,4 @@
-FROM tomcat:8.0.32-jre8
+FROM tomee:8-jre-1.7.4-plus
 
-RUN rm -rf /usr/local/tomcat/webapps/*
-ADD blikjesteller.war /usr/local/tomcat/webapps/ROOT.war
+RUN rm -rf /usr/local/tomee/webapps/*
+ADD blikjesteller.war /usr/local/tomee/webapps/ROOT.war

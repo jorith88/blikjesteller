@@ -1,4 +1,4 @@
-package nl.jorith.blikjesteller.bd.type;
+package nl.jorith.blikjesteller.rest.type;
 
 public class OrderItem {
 	private String blikjeId;

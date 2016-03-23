@@ -8,7 +8,7 @@ import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
-import nl.jorith.blikjesteller.bd.type.Blikje;
+import nl.jorith.blikjesteller.rest.type.Blikje;
 
 public class ConfigTest {
 	

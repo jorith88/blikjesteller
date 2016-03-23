@@ -1,4 +1,4 @@
-package nl.jorith.blikjesteller.bd.type;
+package nl.jorith.blikjesteller.rest.type;
 
 import javax.xml.bind.annotation.XmlRootElement;
 

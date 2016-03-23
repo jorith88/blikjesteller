@@ -8,6 +8,8 @@ import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
 import javax.mail.Message;
 import javax.mail.Message.RecipientType;
 import javax.mail.MessagingException;
@@ -24,10 +26,11 @@ import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 import org.apache.velocity.tools.generic.MathTool;
 import org.apache.velocity.tools.generic.NumberTool;
 
-import nl.jorith.blikjesteller.bd.type.Blikje;
 import nl.jorith.blikjesteller.config.ApplicationConfig;
 import nl.jorith.blikjesteller.config.Configuration;
+import nl.jorith.blikjesteller.rest.type.Blikje;
 
+@Stateless
 public class EmailFacade {
 	private static final Logger LOGGER = Logger.getLogger(EmailFacade.class.getName());
 	
