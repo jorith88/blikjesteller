@@ -21,7 +21,6 @@ import javax.ws.rs.core.Response.Status;
 import org.apache.commons.lang.StringUtils;
 
 import nl.jorith.blikjesteller.facade.BlikjesFacade;
-import nl.jorith.blikjesteller.facade.SecurityFacade;
 import nl.jorith.blikjesteller.rest.type.Blikje;
 
 @Path("/blikjesteller")
@@ -30,12 +29,12 @@ public class BlikjestellerBD {
 	private static final Logger logger = Logger.getLogger(BlikjestellerBD.class.getName());
 
 	@Inject private BlikjesFacade blikjesFacade;
-	@Inject private SecurityFacade securityFacade;
+	@Inject private SecurityTokenBean securityTokenBean;
 	
 	@GET @Path("/blikjes")
 	public List<Blikje> getBlikjes(@Context HttpServletRequest request, @HeaderParam("Debug") boolean debugMode) {
 		// Set a token to prevent calls to /send-order only
-		securityFacade.setToken(UUID.randomUUID().toString());
+		securityTokenBean.createToken();
 
 		return blikjesFacade.getAllBlikjes();
 	}
@@ -44,7 +43,7 @@ public class BlikjestellerBD {
 	public void sendOrder(Map<String, Integer> order, @Context HttpServletRequest request, @HeaderParam("Debug") boolean debugMode) {
 
 		// Only allow orders when a token has been set in the session
-		if (StringUtils.isBlank( securityFacade.getToken())) {
+		if (StringUtils.isBlank(securityTokenBean.getToken())) {
 			logger.log(Level.WARNING, "Received an order without token...");
 			throw new WebApplicationException(Status.FORBIDDEN);
 		}
