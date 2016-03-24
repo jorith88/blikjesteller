@@ -1,4 +1,4 @@
-package nl.jorith.blikjesteller.rest;
+package nl.jorith.blikjesteller.rest.util;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

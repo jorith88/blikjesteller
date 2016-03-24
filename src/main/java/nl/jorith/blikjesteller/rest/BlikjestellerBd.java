@@ -2,7 +2,6 @@ package nl.jorith.blikjesteller.rest;
 
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,23 +17,21 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response.Status;
 
-import org.apache.commons.lang.StringUtils;
-
 import nl.jorith.blikjesteller.facade.BlikjesFacade;
 import nl.jorith.blikjesteller.rest.type.Blikje;
+import nl.jorith.blikjesteller.rest.type.SendOrderAccessBean;
 
 @Path("/blikjesteller")
 @Produces(MediaType.APPLICATION_JSON)
-public class BlikjestellerBD {
-	private static final Logger logger = Logger.getLogger(BlikjestellerBD.class.getName());
+public class BlikjestellerBd {
+	private static final Logger logger = Logger.getLogger(BlikjestellerBd.class.getName());
 
 	@Inject private BlikjesFacade blikjesFacade;
-	@Inject private SecurityTokenBean securityTokenBean;
-	
+	@Inject private SendOrderAccessBean sendOrderAccess;
+
 	@GET @Path("/blikjes")
 	public List<Blikje> getBlikjes(@Context HttpServletRequest request, @HeaderParam("Debug") boolean debugMode) {
-		// Set a token to prevent calls to /send-order only
-		securityTokenBean.createToken();
+		sendOrderAccess.setAllowed(true);
 
 		return blikjesFacade.getAllBlikjes();
 	}
@@ -43,11 +40,11 @@ public class BlikjestellerBD {
 	public void sendOrder(Map<String, Integer> order, @Context HttpServletRequest request, @HeaderParam("Debug") boolean debugMode) {
 
 		// Only allow orders when a token has been set in the session
-		if (StringUtils.isBlank(securityTokenBean.getToken())) {
+		if (sendOrderAccess.isAllowed()) {
 			logger.log(Level.WARNING, "Received an order without token...");
 			throw new WebApplicationException(Status.FORBIDDEN);
 		}
-		
+
 		blikjesFacade.sendOrder(order, debugMode);
 	}
 }

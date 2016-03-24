@@ -1,4 +1,4 @@
-package nl.jorith.blikjesteller.rest;
+package nl.jorith.blikjesteller.rest.util;
 
 import java.io.IOException;
 import java.io.InputStream;
