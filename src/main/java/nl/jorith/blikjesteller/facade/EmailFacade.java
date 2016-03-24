@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
-import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.mail.Message;
 import javax.mail.Message.RecipientType;
 import javax.mail.MessagingException;
@@ -34,13 +34,16 @@ import nl.jorith.blikjesteller.rest.type.Blikje;
 public class EmailFacade {
 	private static final Logger LOGGER = Logger.getLogger(EmailFacade.class.getName());
 	
+	@Inject
+	private Configuration config;
+	
 	public void sendBlikjesOrder(List<Blikje> blikjes, boolean debugMode) {
 
 		String mailBody = getEmailBody("order", velocityContext -> {
 			velocityContext.put("blikjes", blikjes);
 	    });
 
-		ApplicationConfig applicationConfig = Configuration.getApplicationConfig();
+		ApplicationConfig applicationConfig = config.getApplicationConfig();
 
 		String emailTo = debugMode ?
 				applicationConfig.getDebugOrderEmail() : applicationConfig.getOrderEmail();

@@ -2,7 +2,10 @@ package nl.jorith.blikjesteller.rest.type;
 
 import java.io.Serializable;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+
+import nl.jorith.blikjesteller.exception.SendOrderNotAllowedException;
 
 @SessionScoped
 public class SendOrderAccessBean implements Serializable {
@@ -10,11 +13,14 @@ public class SendOrderAccessBean implements Serializable {
 
 	private boolean allowed;
 
-	public void setAllowed(boolean allowed) {
-		this.allowed = allowed;
+	@PostConstruct
+	public void init() {
+		this.allowed = true;
 	}
 
-	public boolean isAllowed() {
-		return allowed;
+	public void checkAccess() throws SendOrderNotAllowedException {
+		if (!allowed) {
+			throw new SendOrderNotAllowedException();
+		}
 	}
 }
