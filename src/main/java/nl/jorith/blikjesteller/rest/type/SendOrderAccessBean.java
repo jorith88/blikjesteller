@@ -2,7 +2,6 @@ package nl.jorith.blikjesteller.rest.type;
 
 import java.io.Serializable;
 
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 
 import nl.jorith.blikjesteller.exception.SendOrderNotAllowedException;
@@ -13,7 +12,6 @@ public class SendOrderAccessBean implements Serializable {
 
 	private boolean allowed;
 
-	@PostConstruct
 	public void init() {
 		this.allowed = true;
 	}

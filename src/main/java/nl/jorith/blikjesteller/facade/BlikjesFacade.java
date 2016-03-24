@@ -30,6 +30,7 @@ public class BlikjesFacade {
 	private SendOrderAccessBean sendOrderAccess;
 
 	public List<Blikje> getAllBlikjes() {
+		sendOrderAccess.init();
 		
 		List<Blikje> blikjes = config.getApplicationConfig().getBlikjes();
 
