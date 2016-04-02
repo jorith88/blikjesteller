@@ -121,14 +121,22 @@
 						<version>0.4.3</version>
 						<executions>
 							<execution>
+								<id>build-image</id>
 								<phase>package</phase>
 								<goals>
 									<goal>build</goal>
 								</goals>
 							</execution>
+							<execution>
+								<id>push-image</id>
+								<phase>package</phase>
+								<goals>
+									<goal>push</goal>
+								</goals>
+							</execution>
 						</executions>
 						<configuration>
-							<imageName>blikjesteller</imageName>
+							<imageName>registry.jorith.nl/blikjesteller</imageName>
 							<dockerDirectory>docker</dockerDirectory>
 							<resources>
 								<resource>
