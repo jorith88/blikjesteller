@@ -59,6 +59,11 @@ public class BlikjesFacade {
 		List<Blikje> orderedBlikjes = getOrderedBlikjes(order);
 
 		emailFacade.sendBlikjesOrder(orderedBlikjes, debugMode);
+
+		logger.info("Order:");
+		orderedBlikjes.stream()
+			.map(blikje -> blikje.getName() + ": " + blikje.getAmount())
+			.forEach(logger::info);
 	}
 
 	private List<Blikje> getOrderedBlikjes(Map<String,Integer> order) {
