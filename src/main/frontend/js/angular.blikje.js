@@ -5,7 +5,7 @@ app.controller('blikjeCtrl', ['$scope', '$http', function($scope, $http) {
 	$scope.totalAmount = 0;
 
 	$scope.debugMode = getParameterByName('debug') === 'true';
-	$http.defaults.headers.common.Debug = $scope.debugMode;
+	$http.defaults.headers.common['X-Debug'] = $scope.debugMode;
 
 	$http.get('/rest/blikjesteller/blikjes').success(function(data) {
 		$scope.blikjes = data;

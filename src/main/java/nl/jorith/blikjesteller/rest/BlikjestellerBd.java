@@ -30,13 +30,13 @@ public class BlikjestellerBd {
 
 	@GET
 	@Path("/blikjes")
-	public List<Blikje> getBlikjes(@HeaderParam("Debug") boolean debugMode) {
+	public List<Blikje> getBlikjes(@HeaderParam("X-Debug") boolean debugMode) {
 		return blikjesFacade.getAllBlikjes();
 	}
 
 	@POST
 	@Path("send-order")
-	public Response sendOrder(Map<String, Integer> order, @HeaderParam("Debug") boolean debugMode) {
+	public Response sendOrder(Map<String, Integer> order, @HeaderParam("X-Debug") boolean debugMode) {
 
 		try {
 			blikjesFacade.sendOrder(order, debugMode);
