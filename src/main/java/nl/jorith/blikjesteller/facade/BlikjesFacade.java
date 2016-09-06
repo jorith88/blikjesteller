@@ -14,7 +14,7 @@ import javax.ws.rs.core.Response.Status;
 import nl.jorith.blikjesteller.config.Configuration;
 import nl.jorith.blikjesteller.exception.SendOrderNotAllowedException;
 import nl.jorith.blikjesteller.rest.type.Blikje;
-import nl.jorith.blikjesteller.rest.type.SendOrderAccessBean;
+import nl.jorith.blikjesteller.rest.type.UserSession;
 
 @Stateless
 public class BlikjesFacade {
@@ -27,14 +27,15 @@ public class BlikjesFacade {
 	private EmailFacade emailFacade;
 
 	@Inject
-	private SendOrderAccessBean sendOrderAccess;
+	private UserSession userSession;
 
 	public List<Blikje> getAllBlikjes() {
-		sendOrderAccess.init();
 
-		logger.info("Retrieve all blikjes");
+		logger.info("Retrieve all blikjes for device " + userSession.getDeviceId());
 
 		List<Blikje> blikjes = config.getApplicationConfig().getBlikjes();
+
+		userSession.setSendOrderAllowed(true);
 
 		return blikjes.stream()
 				.peek(blikje -> blikje.setAmount(0))
@@ -42,9 +43,12 @@ public class BlikjesFacade {
 	}
 
 	public void sendOrder(Map<String, Integer> order, boolean debugMode) throws SendOrderNotAllowedException {
-		sendOrderAccess.checkAccess();
+		
+		if (!userSession.isSendOrderAllowed()) {
+			throw new SendOrderNotAllowedException();
+		}
 
-		logger.info("Send order!");
+		logger.info("Send order for device " + userSession.getDeviceId());
 
 		long numberOfNotZeroBlikjes = order.values().stream()
 											.filter(i -> i > 0)
