@@ -58,7 +58,7 @@ gulp.task('watch',['clean', 'sass','scripts', 'assets'], function(){
 });
 
 gulp.task('clean', function() {
-    del.sync(target + '/index.htm');
+    del.sync(target + '/index.html');
     del.sync(target + '/global');
 });
 
