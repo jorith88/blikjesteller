@@ -4,9 +4,6 @@ app.controller('blikjeCtrl', ['$scope', '$http', function($scope, $http) {
 	$scope.stateChanged = false;
 	$scope.totalAmount = 0;
 
-	$scope.debugMode = getParameterByName('debug') === 'true';
-	$http.defaults.headers.common['X-Debug'] = $scope.debugMode;
-
 	$http.get('/global/config/blikjes.json').success(function(data) {
 		$scope.blikjes = data;
 	});
