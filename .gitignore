@@ -1,9 +1,2 @@
-node_modules
-node
-target
-.settings
-.project
-.classpath
-.tern-project
-src/main/webapp/global
-src/main/webapp/index.html
+web/
+node_modules/

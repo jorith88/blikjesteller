@@ -1,5 +1,5 @@
-var source = "./src/main/frontend";
-var target = "./src/main/webapp";
+var source = "./_dev";
+var target = "./web";
 
 var gulp = require('gulp');
 var changed = require('gulp-changed');
@@ -10,6 +10,7 @@ var watch = require('gulp-watch');
 var sourcemaps = require('gulp-sourcemaps');
 var sass = require('gulp-sass');
 var del = require('del');
+var connect = require('gulp-connect');
 
 var js_src = [
     'node_modules/angular/angular.min.js',
@@ -60,6 +61,13 @@ gulp.task('watch',['clean', 'sass','scripts', 'assets'], function(){
 gulp.task('clean', function() {
     del.sync(target + '/index.html');
     del.sync(target + '/global');
+});
+
+gulp.task('webserver', ['watch'],  function() {
+  connect.server({
+    root: 'web',
+    livereload: true,
+  });
 });
 
 gulp.task('default',['clean','sass','scripts', 'assets'], function(){});
