@@ -28,42 +28,6 @@ app.controller('blikjeCtrl', ['$scope', '$http', function($scope, $http) {
 		}
 	};
 
-	// $scope.isOrderTime = function() {
-	// 	var now = new Date();
-
-	// 	var orderDay 		= 5;
-	// 	var orderStartHour 	= 12;
-	// 	var orderEndHour 	= 18;
-
-	// 	return now.getDay() == orderDay
-	// 		&& now.getHours() >= orderStartHour
-	// 		&& now.getHours() <= orderEndHour;
-	// }
-
-	// $scope.sendOrder = function() {
-	// 	var confirmed = confirm('Bestelling verzenden?');
-
-	// 	if (confirmed) {
-	// 		var order = {};
-
-	// 		angular.forEach($scope.blikjes, function(blikje) {
-	// 			if (blikje.amount > 0) {
-	// 				order[blikje.id] = blikje.amount;
-	// 			}
-	// 		});
-
-	// 		$http.post('/rest/blikjesteller/send-order', order)
-	// 			.then(function(response) {
-	// 				alert('Verzonden!');
-	// 				$scope.orderSent = true;
-
-	// 			}, function errorCallback(response) {
-	// 			   console.log(response);
-	// 			   alert('Bestelling kon niet worden verzonden.');
-	// 			});
-	// 	}
-	// };
-
 	function updateTotal() {
 		$scope.stateChanged = true;
 		var totalAmount = 0;
