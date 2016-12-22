@@ -4,8 +4,8 @@ app.controller('blikjeCtrl', ['$scope', '$http', function($scope, $http) {
 	$scope.stateChanged = false;
 	$scope.totalAmount = 0;
 
-	$http.get('/global/config/blikjes.json').success(function(data) {
-		$scope.blikjes = data;
+	$http.get('/global/config/blikjes.json').then(function(response) {
+		$scope.blikjes = response.data;
 	});
 
 	window.onbeforeunload = function (e) {
