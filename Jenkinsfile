@@ -9,7 +9,7 @@ node {
     }
 
     stage('Build Docker image') {
-        app = docker.build('blikjesteller')
+        app = docker.build('registry.jorith.nl/blikjesteller')
     }
 
     stage ('Publish Docker image') {
