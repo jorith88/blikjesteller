@@ -1,4 +1,6 @@
 node {
+    checkout scm
+
     stage('Build frontend') {
         sh 'npm install'
         sh 'gulp'
