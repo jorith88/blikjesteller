@@ -1,20 +1,16 @@
 node {
     checkout scm
 
-    stage('Build frontend') {
+    stage 'Build frontend'
         sh 'npm install'
         sh 'gulp'
-    }
 
-    stage('Build Docker image') {
+    stage 'Build Docker image'
         def app = docker.build('blikjesteller')
-    }
 
-    stage ('Publish Docker image') {
+    stage 'Publish Docker image'
         app.push('latest')
-    }
 
-    stage ('Deploy') {
+    stage 'Deploy'
 
-    }
 }
