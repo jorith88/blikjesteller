@@ -7,11 +7,11 @@ node {
     }
 
     stage('Build Docker image') {
-
+        def app = docker.build('blikjesteller')
     }
 
     stage ('Publish Docker image') {
-
+        app.push('latest')
     }
 
     stage ('Deploy') {
