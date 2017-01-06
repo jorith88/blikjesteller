@@ -31,12 +31,18 @@
   },
   {
     "id": "6",
+    "name": "Lipton Ice Tea Green",
+    "price": 0.8,
+    "amount": 0
+  },
+  {
+    "id": "7",
     "name": "Minute Maid",
     "price": 1.0,
     "amount": 0
   },
   {
-    "id": "7",
+    "id": "8",
     "name": "Spa Rood",
     "price": 0.7,
     "amount": 0
