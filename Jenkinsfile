@@ -1,6 +1,4 @@
 node {
-    checkout scm
-
     def app
 
     stage('Build frontend') {
@@ -9,7 +7,7 @@ node {
     }
 
     stage('Build Docker image') {
-        app = docker.build('registry.jorith.nl/blikjesteller')
+        app = docker.build('registry.jorith.nl/blikjesteller', '--pull')
     }
 
     stage ('Publish Docker image') {
