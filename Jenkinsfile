@@ -7,7 +7,7 @@ node {
     }
 
     stage('Build Docker image') {
-        app = docker.build('registry.jorith.nl/blikjesteller', '--no-cache')
+        app = docker.build('registry.jorith.nl/blikjesteller', '--no-cache .')
     }
 
     stage ('Publish Docker image') {
