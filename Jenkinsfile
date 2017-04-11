@@ -1,4 +1,6 @@
 node {
+
+    checkout scm
     def app
 
     stage('Build frontend') {
