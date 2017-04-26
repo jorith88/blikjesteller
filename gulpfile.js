@@ -13,11 +13,12 @@ var del = require('del');
 var connect = require('gulp-connect');
 
 var js_src = [
-    'node_modules/angular/angular.min.js',
+    'node_modules/jquery/dist/jquery.min.js',
+    'node_modules/vue/dist/vue.common.min.js',
     'node_modules/bootstrap/js/bootstrap.min.js',
     'node_modules/fastclick/lib/fastclick.js',
     source + '/js/utility.js',
-    source + '/js/angular.blikje.js'
+    source + '/js/blikje.js'
 ]
 
 var assets_src = [
