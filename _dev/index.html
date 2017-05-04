@@ -28,7 +28,7 @@
             <div class="container">
                 <div class="row vertical-align" v-for="blikje in blikjes">
                     <div class="col-xs-4 col-md-4"><span>{{blikje.name}}</span></div>
-                    <div class="col-xs-2"><span>{{blikje.price | currency('&euro; ')}}</span></div>
+                    <div class="col-xs-2"><span>{{blikje.price | currency('&euro;')}}</span></div>
                     <div class="col-xs-2"><span class="badge">{{blikje.amount}}</span></div>
                     <div class="col-xs-2">
                         <button type="button" class="btn btn-lg btn-plusminus" v-on:click="plusOne(blikje)"><i class="fa fa-plus"></i></button>
@@ -40,7 +40,7 @@
 
                 <div class="row row-total vertical-align">
                     <div class="col-xs-4 col-md-4"><strong>Totaal</strong></div>
-                    <div class="col-xs-1"><strong>{{totalAmount | currency('&euro; ')}}</strong></div>
+                    <div class="col-xs-1"><strong>{{totalAmount | currency('&euro;')}}</strong></div>
                 </div>
             </div>
         </div>
