@@ -7,18 +7,18 @@ var concat = require('gulp-concat');
 var stripDebug = require('gulp-strip-debug');
 var uglify = require('gulp-uglify');
 var watch = require('gulp-watch');
-var sourcemaps = require('gulp-sourcemaps');
+// var sourcemaps = require('gulp-sourcemaps');
 var sass = require('gulp-sass');
 var del = require('del');
 var connect = require('gulp-connect');
 
 var js_src = [
-    'node_modules/jquery/dist/jquery.min.js',
-    'node_modules/vue/dist/vue.common.min.js',
+    'node_modules/vue/dist/vue.min.js',
+    'node_modules/vue-resource/dist/vue-resource.min.js',
     'node_modules/bootstrap/js/bootstrap.min.js',
     'node_modules/fastclick/lib/fastclick.js',
     source + '/js/utility.js',
-    source + '/js/blikje.js'
+    source + '/js/blikjesteller.js'
 ]
 
 var assets_src = [
@@ -33,10 +33,10 @@ var sass_src = [
 // JS concat, strip debugging and minify
 gulp.task('scripts', function() {
     return gulp.src(js_src)
-        .pipe(sourcemaps.init({loadMaps: true}))
+        // .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(concat('script.js'))
         .pipe(uglify({ output: { ascii_only: true } }))
-        .pipe(sourcemaps.write('.'))
+        // .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(target + '/global/js/'));
 });
 
@@ -47,9 +47,9 @@ gulp.task('assets', function() {
 
 gulp.task('sass', function () {
     return gulp.src(sass_src)
-        .pipe(sourcemaps.init())
+        // .pipe(sourcemaps.init())
         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-        .pipe(sourcemaps.write('.'))
+        // .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(target + '/global/css/'));
 });
 
