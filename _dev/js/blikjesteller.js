@@ -1,9 +1,8 @@
-FastClick.attach(document.body);
-
-Vue.filter('currency', currencyFilter);
-
 var vm = new Vue({
     el: '#blikjesteller',
+    filters: {
+        currency: currencyFilter
+    },
     data: {
         blikjes: null,
         totalAmount: 0,
@@ -26,6 +25,8 @@ var vm = new Vue({
 vm.$http.get('/global/config/blikjes.json').then(function(response) {
     vm.blikjes = response.data;
 });
+
+FastClick.attach(document.body);
 
 function updateTotal() {
     vm.stateChanged = true;
