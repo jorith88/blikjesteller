@@ -27,6 +27,6 @@ node {
 
         sh "docker run --name=blikjesteller -p 8181:80 -d --restart=always -v /etc/localtime:/etc/localtime -v /etc/timezone:/etc/timezone registry.jorith.nl/blikjesteller"
 
-        emailext body: 'Deployed new Blikjesteller to production.', subject: 'Blikjesteller', to: 'jorith@gmail.com'
+        emailext body: 'Deployed new version to production.', subject: 'Blikjesteller', to: 'jorith@gmail.com'
     }
 }
