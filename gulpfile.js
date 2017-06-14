@@ -7,7 +7,7 @@ var concat = require('gulp-concat');
 var stripDebug = require('gulp-strip-debug');
 var uglify = require('gulp-uglify');
 var watch = require('gulp-watch');
-var sourcemaps = require('gulp-sourcemaps');
+//var sourcemaps = require('gulp-sourcemaps');
 var sass = require('gulp-sass');
 var del = require('del');
 var connect = require('gulp-connect');
@@ -33,10 +33,10 @@ var sass_src = [
 // JS concat, strip debugging and minify
 gulp.task('scripts', function() {
     return gulp.src(js_src)
-        .pipe(sourcemaps.init({loadMaps: true}))
+        //.pipe(sourcemaps.init({loadMaps: true}))
         .pipe(concat('script.js'))
         .pipe(uglify({ output: { ascii_only: true } }))
-        .pipe(sourcemaps.write('.'))
+        //.pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(target + '/global/js/'));
 });
 
