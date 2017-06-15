@@ -6,6 +6,7 @@ node {
     stage('Build frontend') {
         sh 'npm install'
         sh 'gulp'
+        sh 'gulp cacheBuster'
     }
 
     stage('Build Docker image') {

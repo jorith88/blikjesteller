@@ -11,6 +11,7 @@ var watch = require('gulp-watch');
 var sass = require('gulp-sass');
 var del = require('del');
 var connect = require('gulp-connect');
+var cacheBuster = require('gulp-cache-bust');
 
 var js_src = [
     'node_modules/vue/dist/vue.min.js',
@@ -53,9 +54,9 @@ gulp.task('sass', function () {
         .pipe(gulp.dest(target + '/global/css/'));
 });
 
-gulp.task('watch',['clean', 'sass','scripts', 'assets'], function(){
-    gulp.watch(sass_src, ['sass']);
-    gulp.watch(js_src, ['scripts']);
+gulp.task('watch',['clean', 'sass','scripts', 'assets', 'cacheBuster'], function(){
+    gulp.watch(sass_src, ['sass', 'cacheBuster']);
+    gulp.watch(js_src, ['scripts', 'cacheBuster']);
     gulp.watch(assets_src, ['assets']);
 });
 
@@ -69,6 +70,12 @@ gulp.task('webserver', ['watch'],  function() {
     root: 'web',
     livereload: true,
   });
+});
+
+gulp.task('cacheBuster', [], function () {
+    return gulp.src(target + '/index.html')
+        .pipe(cacheBuster())
+        .pipe(gulp.dest(target));
 });
 
 gulp.task('default',['clean','sass','scripts', 'assets'], function(){});
