@@ -1,51 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="nl">
     <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
         <title>Blikjesteller</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
+        <!-- Add to homescreen for Chrome on Android -->
+        <meta name="mobile-web-app-capable" content="yes">
+        <link rel="icon" sizes="192x192" href="/global/img/blikjecola.png">
+
+        <!-- Add to homescreen for Safari on iOS -->
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-title" content="Blikjesteller">
+        <link rel="apple-touch-icon-precomposed" href="/global/img/blikjecola.png">
 
-        <link rel="shortcut icon" type="image/x-icon" href="global/img/blikjecola.png" />
-        <link rel="apple-touch-icon" href="global/img/blikjecola.png" />
+        <!-- Tile icon for Win8 (144x144 + tile color) -->
+        <meta name="msapplication-TileImage" content="/global/img/blikjecola.png">
+        <meta name="msapplication-TileColor" content="#3372DF">
 
-        <link rel="stylesheet" href="global/css/base.css"/>
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-        <link rel="manifest" href="/manifest.json">
+        <link rel="shortcut icon" href="/global/img/blikjecola.png">
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-red.min.css">
+        <link rel="stylesheet" href="/global/css/base.css"
     </head>
     <body>
-        <div id="blikjesteller">
-            <div id="content" class="offcanvas-content clearfix">
-                <header>
-                    <div class="container-fluid">
-                        <div class="header-title">
-                            <h1>Blikjesteller</h1>
+        <div id="blikjesteller" class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+            <header class="mdl-layout__header">
+                <div class="mdl-layout__header-row">
+                    <img src="/global/img/can.svg"></img>
+                    <span class="mdl-layout-title">Blikjesteller</span>
+                </div>
+            </header>
+            <main class="mdl-layout__content mdl-color--grey-100">
+                <div class="page-content">
+                    <div v-for="(blikje, index) in blikjes" class="mdl-card mdl-cell mdl-shadow--2dp">
+                        <div class="mdl-card__title">
+                            <h5>
+                                <div class="mdl-card__title-text">{{blikje.name}}</div>
+                                <div class="mdl-card__subtitle-text">{{blikje.price | currency('&euro;')}}</div>
+                            </h5>
+                        </div>
+                        <div class="mdl-card__supporting-text">
+                            <h1>{{blikje.amount}}</h1>
+                        </div>
+                        <div class="mdl-card__menu">
+                            <button v-on:click="plusOne(blikje)" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                <i class="material-icons">add</i>
+                            </button>
+                            <button v-on:click="minusOne(blikje)" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                <i class="material-icons">remove</i>
+                            </button>
                         </div>
                     </div>
-                </header>
-            </div>
-            <div class="container">
-                <div class="row vertical-align" v-for="blikje in blikjes">
-                    <div class="col-xs-4 col-md-4"><span>{{blikje.name}}</span></div>
-                    <div class="col-xs-2"><span>{{blikje.price | currency('&euro;')}}</span></div>
-                    <div class="col-xs-2"><span class="badge">{{blikje.amount}}</span></div>
-                    <div class="col-xs-2">
-                        <button type="button" class="btn btn-lg btn-plusminus" v-on:click="plusOne(blikje)"><i class="fa fa-plus"></i></button>
-                    </div>
-                    <div class="col-xs-2">
-                        <button type="button" class="btn btn-lg btn-plusminus" v-on:click="minusOne(blikje)"><i class="fa fa-minus"></i></button>
+                    <div class="mdl-card mdl-cell mdl-shadow--2dp">
+                        <div class="mdl-card__title">
+                            <h5>
+                                <div class="mdl-card__title-text">Totaal</div>
+                            </h5>
+                        </div>
+                        <div class="mdl-card__supporting-text">
+                            <h1>{{totalAmount | currency('&euro;')}}</h1>
+                        </div>
                     </div>
                 </div>
-
-                <div class="row row-total vertical-align">
-                    <div class="col-xs-4 col-md-4"><strong>Totaal</strong></div>
-                    <div class="col-xs-1"><strong>{{totalAmount | currency('&euro;')}}</strong></div>
-                </div>
-            </div>
+            </main>
         </div>
-
+        <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
         <script src="global/js/script.js"></script>
         <script>
             !function(b,l,i,k,j,e){b.GoogleAnalyticsObject=i;b[i]||(b[i]=function(){

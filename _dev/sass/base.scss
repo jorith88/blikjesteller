@@ -1,6 +1,41 @@
-$sticky-header-height-xs: 60px;
-$zindex-header:           1080 !default;
+.mdl-layout__header-row {
+    padding-left: 10px;
 
-@import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-@import "header";
-@import "blikje";
+    img {
+        width: 30px;
+    }
+}
+
+.mdl-layout-title {
+    padding-left: 8px;
+}
+
+.mdl-card {
+    min-height: 50px;
+}
+
+.mdl-button {
+    padding: 0;
+    min-width: 36px;
+}
+
+.mdl-card__title {
+    padding-bottom: 0;
+
+    h5 {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}
+
+.mdl-card__supporting-text {
+    text-align:center;
+    padding-top: 0;
+    padding-bottom: 0;
+
+    h1 {
+        font-size: 48px;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}
