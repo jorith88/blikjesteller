@@ -6,7 +6,7 @@ var filesToCache = [
   '/global/css/base.css',
   '/global/js/script.js',
   '/global/config/blikjes.json',
-  '/global/img/blikjecola.png'
+  '/global/img/can.png'
 ];
 
 self.addEventListener('install', function(e) {
