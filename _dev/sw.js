@@ -1,5 +1,5 @@
-var dataCacheName = 'blikjesteller-v1';
-var cacheName = 'blikjesteller-final-1';
+var dataCacheName = 'blikjesteller-v2';
+var cacheName = 'blikjesteller-final-2';
 var filesToCache = [
   '/',
   '/index.html',
