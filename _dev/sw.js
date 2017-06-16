@@ -1,44 +1,50 @@
-var dataCacheName = 'blikjesteller-v2';
-var cacheName = 'blikjesteller-final-2';
-var filesToCache = [
-  '/',
-  '/index.html',
-  '/global/css/base.css',
-  '/global/js/script.js',
-  '/global/config/blikjes.json',
-  '/global/img/can.png'
-];
-
-self.addEventListener('install', function(e) {
-  console.log('[ServiceWorker] Install');
-  e.waitUntil(
-    caches.open(cacheName).then(function(cache) {
-      console.log('[ServiceWorker] Caching app shell');
-      return cache.addAll(filesToCache);
-    })
-  );
+self.addEventListener('install', e => {
+    // init
 });
 
-self.addEventListener('activate', function(e) {
-  console.log('[ServiceWorker] Activate');
-  e.waitUntil(
-    caches.keys().then(function(keyList) {
-      return Promise.all(keyList.map(function(key) {
-        if (key !== cacheName && key !== dataCacheName) {
-          console.log('[ServiceWorker] Removing old cache', key);
-          return caches.delete(key);
-        }
-      }));
-    })
-  );
-  return self.clients.claim();
+self.addEventListener('activate', event => {
+    event.waitUntil(self.clients.claim());
 });
 
-self.addEventListener('fetch', function(e) {
-  console.log('[Service Worker] Fetch', e.request.url);
-  e.respondWith(
-    caches.match(e.request).then(function(response) {
-      return response || fetch(e.request);
-    })
-  );
+const CACHE = "v1";
+
+self.addEventListener('fetch', function (evt) {
+    // console.log(evt.request.url, evt.request);
+    if (evt.request.url.indexOf('data:') !== 0 && evt.request.url.indexOf('chrome-extension://') !== 0&& evt.request.url.indexOf('https://www.googleapis.com') !== 0)
+    evt.respondWith(fromNetwork(evt.request, 400).catch(function () {
+        return fromCache(evt.request);
+    }));
 });
+
+function fromNetwork(request, timeout) {
+    return new Promise(function (fulfill, reject) {
+
+        var timeoutId = setTimeout(reject, timeout);
+        var fetchRequest = request.clone();
+
+        fetch(fetchRequest).then(function (response) {
+            clearTimeout(timeoutId);
+            update(request)
+            fulfill(response);
+
+        }, reject);
+    });
+}
+
+function fromCache(request) {
+    return caches.open(CACHE).then(function (cache) {
+        return cache.match(request).then(function (matching) {
+            return matching || Promise.reject('no-match');
+        });
+    });
+}
+
+function update(request) {
+  return caches.open(CACHE).then(function (cache) {
+    return fetch(request).then(function (response) {
+      return cache.put(request, response.clone()).then(function () {
+        return response;
+      });
+    });
+  });
+}
