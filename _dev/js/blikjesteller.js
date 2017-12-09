@@ -96,7 +96,7 @@ function startCoop(id) {
     if (coopSocket != null) {
         coopSocket.close();
     }
-    vm.$http.post('/service/coop/start?id=' + id, vm.blikjes).then(function(response) {
+    vm.$http.post('/service/coop/start?key=' + id, vm.blikjes).then(function(response) {
         startCoopWebsocket(id)
 
         vm.coopStarted = true;
@@ -108,7 +108,7 @@ function joinCoop(id) {
     if (coopSocket != null) {
         coopSocket.close();
     }
-    vm.$http.post('/service/coop/join?id=' + id).then(function(response) {
+    vm.$http.post('/service/coop/join?key=' + id).then(function(response) {
         startCoopWebsocket(id)
 
         vm.blikjes = response.data;
