@@ -92,3 +92,20 @@ dialog {
     top: 50%;
     transform: translate(0, -50%);
   }
+
+  .mdl-dialog__title {
+    padding: 4px 4px 0;
+    font-size: 2.0rem;
+  }
+
+  .mdl-dialog__content {
+    padding: 16px 6px 0px;
+  }
+
+  .mdl-dialog__actions .mdl-button {
+    min-width: 80px;
+  }
+
+  .uppercase {
+    text-transform: uppercase;
+  }
