@@ -9,7 +9,8 @@ var vm = new Vue({
         totalAmount: 0,
         stateChanged: false,
         joinCoopId: null,
-        coopStarted: false
+        coopStarted: false,
+        coopJoined: false
     },
     methods: {
         plusOne: function(blikje) {
@@ -111,9 +112,7 @@ function joinCoop(id) {
     vm.$http.post('/service/coop/join?key=' + id).then(function(response) {
         startCoopWebsocket(id)
 
-        // vm.coopId = id;
-        // vm.coopStarted = true;
-
+        vm.coopJoined = true;
         vm.blikjes = response.data;
         updateTotal();
 
