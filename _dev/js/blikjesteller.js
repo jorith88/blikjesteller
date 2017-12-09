@@ -1,3 +1,4 @@
+var coopSocket = null;
 var vm = new Vue({
     el: '#blikjesteller',
     filters: {
@@ -6,18 +7,45 @@ var vm = new Vue({
     data: {
         blikjes: null,
         totalAmount: 0,
-        stateChanged: false
+        stateChanged: false,
+        joinCoopId: null
     },
     methods: {
         plusOne: function(blikje) {
-            blikje.amount += 1;
-            updateTotal();
+            if (coopSocket != null) {
+                coopPlusOne(blikje);
+            } else {
+                blikje.amount += 1;
+                updateTotal();
+            }
         },
         minusOne: function(blikje) {
             if (blikje.amount > 0) {
-                blikje.amount -= 1;
-                updateTotal();
+                if (coopSocket != null) {
+                    coopMinusOne(blikje);
+                } else {
+                    blikje.amount -= 1;
+                    updateTotal();
+                }
             }
+        },
+        startCoop: function() {
+           setupCoopMode(vm.coopId);
+        },
+        joinCoop: function() {
+            setupCoopMode(vm.joinCoopId);
+        }
+    },
+    computed: {
+        coopId: function () {
+            var text = "";
+            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+            for (var i = 0; i < 6; i++) {
+              text += possible.charAt(Math.floor(Math.random() * possible.length));
+            }
+
+            return text;
         }
     }
 });
@@ -62,6 +90,60 @@ function currencyFilter(value, currency, decimals) {
         _int.slice(i).replace(digitsRE, '$1,') +
         _float
 }
+
+function setupCoopMode(id) {
+    if (coopSocket != null) {
+        coopSocket.close();
+    }
+
+    console.log('Setup co-op mode with ID ' + id);
+
+    var wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    var wsUrl = wsProtocol + '//' + window.location.host + '/ws/coop/' + id;
+    // var wsUrl = 'wss://blikje.jorith.nl/ws/coop/' + id;
+
+    coopSocket = new ReconnectingWebSocket(wsUrl);
+
+    coopSocket.onmessage = function(evt) {
+        var data = JSON.parse(evt.data)
+
+        console.log(vm.blikjes);
+        var blikje = vm.blikjes.find(function(x) {
+            return x.id === data.blikje;
+        });
+
+        if (data.add) {
+            blikje.amount += 1;
+            updateTotal();
+        } else if (data.substract) {
+            blikje.amount -= 1;
+            updateTotal();
+        }
+    };
+
+    coopSocket.onerror = function(evt) {
+        console.log('Error in Websocket communication',evt);
+    };
+
+
+}
+
+function coopPlusOne(blikje) {
+    var data = {
+        blikje: blikje.id,
+        add: true
+    }
+    coopSocket.send(JSON.stringify(data));
+}
+
+function coopMinusOne(blikje) {
+    var data = {
+        blikje: blikje.id,
+        substract: true
+    }
+    coopSocket.send(JSON.stringify(data));
+}
+
 
 window.onbeforeunload = function (e) {
     if (vm.stateChanged) {

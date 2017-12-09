@@ -24,10 +24,11 @@
 
         <link rel="shortcut icon" href="/global/img/can.png">
 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-red.min.css">
-        <link rel="stylesheet" href="/global/css/base.css"
+        <link rel="stylesheet" href="/global/css/base.css">
     </head>
     <body>
         <div id="blikjesteller" class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -35,6 +36,11 @@
                 <div class="mdl-layout__header-row">
                     <img src="/global/img/can.svg"></img>
                     <span class="mdl-layout-title">Blikjesteller</span>
+                    <div class="btn-coop">
+                        <button class="mdl-button mdl-button--icon mdl-js-button" id="show-dialog">
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                        </button>
+                    </div>
                 </div>
             </header>
             <main class="mdl-layout__content mdl-color--grey-100">
@@ -70,9 +76,45 @@
                     </div>
                 </div>
             </main>
+            <dialog class="mdl-dialog">
+                <h4 class="mdl-dialog__title">Co-op Mode</h4>
+                <div class="mdl-dialog__content coop-id">
+                    <h3>{{ coopId }}</h3>
+                </div>
+                <div class="mdl-dialog__actions">
+                    <button type="button" class="mdl-button start-new" v-on:click="startCoop">Start</button>
+                </div>
+                <hr>
+                <div class="mdl-dialog__content">
+                    <h4>Or join existing ...</h4>
+                    <div class="mdl-textfield mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" id="join-coop-id" v-model="joinCoopId">
+                        <label class="mdl-textfield__label" for="join-coop-id">Code<label>
+                    </div>
+                </div>
+                <div class="mdl-dialog__actions">
+                    <button type="button" class="mdl-button join-existing" v-on:click="joinCoop">Join</button>
+                </div>
+            </dialog>
         </div>
         <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
         <script src="global/js/script.js"></script>
+        <script>
+            var dialog = document.querySelector('dialog');
+            var showDialogButton = document.querySelector('#show-dialog');
+            if (! dialog.showModal) {
+                dialogPolyfill.registerDialog(dialog);
+            }
+            showDialogButton.addEventListener('click', function() {
+                dialog.showModal();
+            });
+            dialog.querySelector('.start-new').addEventListener('click', function() {
+                dialog.close();
+            });
+            dialog.querySelector('.join-existing').addEventListener('click', function() {
+                dialog.close();
+            });
+        </script>
         <script>
             !function(b,l,i,k,j,e){b.GoogleAnalyticsObject=i;b[i]||(b[i]=function(){
             (b[i].q=b[i].q||[]).push(arguments)});b[i].l=+new Date;j=l.createElement(k);
