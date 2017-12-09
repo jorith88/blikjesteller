@@ -18,6 +18,7 @@ var js_src = [
     'node_modules/vue-resource/dist/vue-resource.min.js',
     'node_modules/bootstrap/js/bootstrap.min.js',
     'node_modules/fastclick/lib/fastclick.js',
+    'node_modules/dialog-polyfill/dialog-polyfill.js',
     source + '/js/utility.js',
     source + '/js/blikjesteller.js'
 ]
@@ -28,6 +29,7 @@ var assets_src = [
 ];
 
 var sass_src = [
+    'node_modules/dialog-polyfill/dialog-polyfill.css',
     source + '/sass/**/*.scss'
 ];
 

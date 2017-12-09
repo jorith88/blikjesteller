@@ -6,7 +6,8 @@ var vm = new Vue({
     data: {
         blikjes: null,
         totalAmount: 0,
-        stateChanged: false
+        stateChanged: false,
+        joinCoopId: null
     },
     methods: {
         plusOne: function(blikje) {
@@ -18,6 +19,24 @@ var vm = new Vue({
                 blikje.amount -= 1;
                 updateTotal();
             }
+        },
+        startCoop: function() {
+           setupCoopMode(vm.coopId);
+        },
+        joinCoop: function() {
+            setupCoopMode(vm.joinCoopId);
+        }
+    },
+    computed: {
+        coopId: function () {
+            var text = "";
+            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+            for (var i = 0; i < 6; i++) {
+              text += possible.charAt(Math.floor(Math.random() * possible.length));
+            }
+
+            return text;
         }
     }
 });
@@ -62,6 +81,11 @@ function currencyFilter(value, currency, decimals) {
         _int.slice(i).replace(digitsRE, '$1,') +
         _float
 }
+
+function setupCoopMode(id) {
+    console.log('Setup co-op mode with ID ' + id);
+}
+
 
 window.onbeforeunload = function (e) {
     if (vm.stateChanged) {
