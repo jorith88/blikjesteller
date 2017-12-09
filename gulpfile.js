@@ -30,7 +30,6 @@ var assets_src = [
 ];
 
 var sass_src = [
-    'node_modules/dialog-polyfill/dialog-polyfill.css',
     source + '/sass/**/*.scss'
 ];
 
