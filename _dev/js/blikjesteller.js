@@ -1,3 +1,4 @@
+var coopSocket = null;
 var vm = new Vue({
     el: '#blikjesteller',
     filters: {
@@ -11,13 +12,21 @@ var vm = new Vue({
     },
     methods: {
         plusOne: function(blikje) {
-            blikje.amount += 1;
-            updateTotal();
+            if (coopSocket != null) {
+                coopPlusOne(blikje);
+            } else {
+                blikje.amount += 1;
+                updateTotal();
+            }
         },
         minusOne: function(blikje) {
             if (blikje.amount > 0) {
-                blikje.amount -= 1;
-                updateTotal();
+                if (coopSocket != null) {
+                    coopMinusOne(blikje);
+                } else {
+                    blikje.amount -= 1;
+                    updateTotal();
+                }
             }
         },
         startCoop: function() {
@@ -83,7 +92,56 @@ function currencyFilter(value, currency, decimals) {
 }
 
 function setupCoopMode(id) {
+    if (coopSocket != null) {
+        coopSocket.close();
+    }
+
     console.log('Setup co-op mode with ID ' + id);
+
+    var wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    var wsUrl = wsProtocol + '//' + window.location.host + '/ws/coop/' + id;
+    // var wsUrl = 'wss://blikje.jorith.nl/ws/coop/' + id;
+
+    coopSocket = new ReconnectingWebSocket(wsUrl);
+
+    coopSocket.onmessage = function(evt) {
+        var data = JSON.parse(evt.data)
+
+        console.log(vm.blikjes);
+        var blikje = vm.blikjes.find(function(x) {
+            return x.id === data.blikje;
+        });
+
+        if (data.add) {
+            blikje.amount += 1;
+            updateTotal();
+        } else if (data.substract) {
+            blikje.amount -= 1;
+            updateTotal();
+        }
+    };
+
+    coopSocket.onerror = function(evt) {
+        console.log('Error in Websocket communication',evt);
+    };
+
+
+}
+
+function coopPlusOne(blikje) {
+    var data = {
+        blikje: blikje.id,
+        add: true
+    }
+    coopSocket.send(JSON.stringify(data));
+}
+
+function coopMinusOne(blikje) {
+    var data = {
+        blikje: blikje.id,
+        substract: true
+    }
+    coopSocket.send(JSON.stringify(data));
 }
 
 
