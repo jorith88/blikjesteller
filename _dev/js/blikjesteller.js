@@ -100,6 +100,7 @@ function startCoop(id) {
     vm.$http.post('/service/coop/start?key=' + id, vm.blikjes).then(function(response) {
         startCoopWebsocket(id)
 
+        vm.coopJoined = false;
         vm.coopStarted = true;
         document.querySelector('dialog').close();
     });
