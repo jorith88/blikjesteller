@@ -10,7 +10,12 @@ const CACHE = "v1";
 
 self.addEventListener('fetch', function (evt) {
     // console.log(evt.request.url, evt.request);
-    if (evt.request.url.indexOf('data:') !== 0 && evt.request.url.indexOf('chrome-extension://') !== 0&& evt.request.url.indexOf('https://www.googleapis.com') !== 0)
+    if (
+        evt.request.url.indexOf('data:') !== 0
+        && evt.request.url.indexOf('chrome-extension://') !== 0
+        && evt.request.url.indexOf('https://www.googleapis.com') !== 0
+        && evt.request.url.indexOf('/service/') !== 0
+    )
     evt.respondWith(fromNetwork(evt.request, 400).catch(function () {
         return fromCache(evt.request);
     }));
