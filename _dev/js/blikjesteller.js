@@ -111,9 +111,12 @@ function joinCoop(id) {
     vm.$http.post('/service/coop/join?key=' + id).then(function(response) {
         startCoopWebsocket(id)
 
+        // vm.coopId = id;
+        // vm.coopStarted = true;
+
         vm.blikjes = response.data;
-        vm.coopId = id;
-        vm.coopStarted = true;
+        updateTotal();
+
         document.querySelector('dialog').close();
     });
 }
