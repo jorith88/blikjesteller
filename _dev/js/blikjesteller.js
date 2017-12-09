@@ -114,6 +114,7 @@ function joinCoop(id) {
         startCoopWebsocket(id)
 
         vm.joinCoopId = vm.joinCoopId.toUpperCase()
+        vm.coopStarted = false;
         vm.coopJoined = true;
         vm.blikjes = response.data;
         updateTotal();
