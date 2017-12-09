@@ -8,7 +8,8 @@ var vm = new Vue({
         blikjes: null,
         totalAmount: 0,
         stateChanged: false,
-        joinCoopId: null
+        joinCoopId: null,
+        coopStarted: false
     },
     methods: {
         plusOne: function(blikje) {
@@ -30,10 +31,10 @@ var vm = new Vue({
             }
         },
         startCoop: function() {
-           setupCoopMode(vm.coopId);
+            startCoop(vm.coopId);
         },
         joinCoop: function() {
-            setupCoopMode(vm.joinCoopId);
+            joinCoop(vm.joinCoopId);
         }
     },
     computed: {
@@ -41,7 +42,7 @@ var vm = new Vue({
             var text = "";
             var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-            for (var i = 0; i < 6; i++) {
+            for (var i = 0; i < 4; i++) {
               text += possible.charAt(Math.floor(Math.random() * possible.length));
             }
 
@@ -91,13 +92,33 @@ function currencyFilter(value, currency, decimals) {
         _float
 }
 
-function setupCoopMode(id) {
+function startCoop(id) {
     if (coopSocket != null) {
         coopSocket.close();
     }
+    vm.$http.post('/service/coop/start?id=' + id, vm.blikjes).then(function(response) {
+        startCoopWebsocket(id)
 
-    console.log('Setup co-op mode with ID ' + id);
+        vm.coopStarted = true;
+        document.querySelector('dialog').close();
+    });
+}
 
+function joinCoop(id) {
+    if (coopSocket != null) {
+        coopSocket.close();
+    }
+    vm.$http.post('/service/coop/join?id=' + id).then(function(response) {
+        startCoopWebsocket(id)
+
+        vm.blikjes = response.data;
+        vm.coopId = id;
+        vm.coopStarted = true;
+        document.querySelector('dialog').close();
+    });
+}
+
+function startCoopWebsocket(id) {
     var wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
     var wsUrl = wsProtocol + '//' + window.location.host + '/ws/coop/' + id;
     // var wsUrl = 'wss://blikje.jorith.nl/ws/coop/' + id;
@@ -124,8 +145,6 @@ function setupCoopMode(id) {
     coopSocket.onerror = function(evt) {
         console.log('Error in Websocket communication',evt);
     };
-
-
 }
 
 function coopPlusOne(blikje) {

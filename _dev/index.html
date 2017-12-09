@@ -31,55 +31,58 @@
         <link rel="stylesheet" href="/global/css/base.css">
     </head>
     <body>
-        <div id="blikjesteller" class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-            <header class="mdl-layout__header">
-                <div class="mdl-layout__header-row">
-                    <img src="/global/img/can.svg"></img>
-                    <span class="mdl-layout-title">Blikjesteller</span>
-                    <div class="btn-coop">
-                        <button class="mdl-button mdl-button--icon mdl-js-button" id="show-dialog">
-                            <i class="fa fa-users" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                </div>
-            </header>
-            <main class="mdl-layout__content mdl-color--grey-100">
-                <div class="page-content">
-                    <div v-for="(blikje, index) in blikjes" class="mdl-card mdl-cell mdl-shadow--2dp">
-                        <div class="mdl-card__title">
-                            <h5>
-                                <div class="mdl-card__title-text">{{blikje.name}}</div>
-                                <div class="mdl-card__subtitle-text">{{blikje.price | currency('&euro;')}}</div>
-                            </h5>
-                        </div>
-                        <div class="mdl-card__supporting-text">
-                            <h1>{{blikje.amount}}</h1>
-                        </div>
-                        <div class="mdl-card__menu">
-                            <button v-on:click="plusOne(blikje)" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                                <i class="material-icons">add</i>
-                            </button>
-                            <button v-on:click="minusOne(blikje)" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                                <i class="material-icons">remove</i>
+        <div id="blikjesteller">
+            <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+                <header class="mdl-layout__header">
+                    <div class="mdl-layout__header-row">
+                        <img src="/global/img/can.svg"></img>
+                        <span class="mdl-layout-title">Blikjesteller</span>
+                        <span v-if="coopStarted" class="mdl-layout-title">[Co-op: {{ coopId }}]</span>
+                        <div class="btn-coop">
+                            <button class="mdl-button mdl-button--icon mdl-js-button" id="show-dialog">
+                                <i class="fa fa-users" aria-hidden="true"></i>
                             </button>
                         </div>
                     </div>
-                    <div class="mdl-card mdl-cell mdl-shadow--2dp">
-                        <div class="mdl-card__title">
-                            <h5>
-                                <div class="mdl-card__title-text">Totaal</div>
-                            </h5>
+                </header>
+                <main class="mdl-layout__content mdl-color--grey-100">
+                    <div class="page-content">
+                        <div v-for="(blikje, index) in blikjes" class="mdl-card mdl-cell mdl-shadow--2dp">
+                            <div class="mdl-card__title">
+                                <h5>
+                                    <div class="mdl-card__title-text">{{blikje.name}}</div>
+                                    <div class="mdl-card__subtitle-text">{{blikje.price | currency('&euro;')}}</div>
+                                </h5>
+                            </div>
+                            <div class="mdl-card__supporting-text">
+                                <h1>{{blikje.amount}}</h1>
+                            </div>
+                            <div class="mdl-card__menu">
+                                <button v-on:click="plusOne(blikje)" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                    <i class="material-icons">add</i>
+                                </button>
+                                <button v-on:click="minusOne(blikje)" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                    <i class="material-icons">remove</i>
+                                </button>
+                            </div>
                         </div>
-                        <div class="mdl-card__supporting-text">
-                            <h1>{{totalAmount | currency('&euro;')}}</h1>
+                        <div class="mdl-card mdl-cell mdl-shadow--2dp">
+                            <div class="mdl-card__title">
+                                <h5>
+                                    <div class="mdl-card__title-text">Totaal</div>
+                                </h5>
+                            </div>
+                            <div class="mdl-card__supporting-text">
+                                <h1>{{totalAmount | currency('&euro;')}}</h1>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </main>
+                </main>
+            </div>
             <dialog class="mdl-dialog">
                 <h4 class="mdl-dialog__title">Co-op Mode</h4>
                 <div class="mdl-dialog__content coop-id">
-                    <h3>{{ coopId }}</h3>
+                    <!-- <h3>{{ coopId }}</h3> -->
                 </div>
                 <div class="mdl-dialog__actions">
                     <button type="button" class="mdl-button start-new" v-on:click="startCoop">Start</button>
@@ -108,12 +111,12 @@
             showDialogButton.addEventListener('click', function() {
                 dialog.showModal();
             });
-            dialog.querySelector('.start-new').addEventListener('click', function() {
-                dialog.close();
-            });
-            dialog.querySelector('.join-existing').addEventListener('click', function() {
-                dialog.close();
-            });
+            // dialog.querySelector('.start-new').addEventListener('click', function() {
+            //     dialog.close();
+            // });
+            // dialog.querySelector('.join-existing').addEventListener('click', function() {
+            //     dialog.close();
+            // });
         </script>
         <script>
             !function(b,l,i,k,j,e){b.GoogleAnalyticsObject=i;b[i]||(b[i]=function(){
