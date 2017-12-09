@@ -112,6 +112,7 @@ function joinCoop(id) {
     vm.$http.post('/service/coop/join?key=' + id).then(function(response) {
         startCoopWebsocket(id)
 
+        vm.coopJoined = vm.coopJoined.toUpperCase()
         vm.coopJoined = true;
         vm.blikjes = response.data;
         updateTotal();
