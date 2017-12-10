@@ -83,14 +83,14 @@
             <dialog class="mdl-dialog">
                 <h5 class="mdl-dialog__title">Many hands make light work.</h5>
                 <div class="mdl-dialog__content">
-                    <p>Click on the button below to start a new co-op session</p>
+                    <p>Click on the button below to start a new co-op session.</p>
                 </div>
                 <div class="mdl-dialog__actions">
                     <button type="button" class="mdl-button start-new" v-on:click="startCoop">Start</button>
                 </div>
                 <hr>
                 <div class="mdl-dialog__content">
-                    <p>... or fill in the code of an already started session to join.</p>
+                    <p>..or fill in the code of an already started session to join.</p>
                     <div class="mdl-textfield mdl-js-textfield">
                         <input class="mdl-textfield__input uppercase" type="text" id="join-coop-id" v-model="joinCoopId" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
                         <label class="mdl-textfield__label" for="join-coop-id">Code<label>
@@ -98,6 +98,7 @@
                 </div>
                 <div class="mdl-dialog__actions">
                     <button type="button" class="mdl-button join-existing" v-on:click="joinCoop">Join</button>
+                    <button type="button" class="mdl-button" v-on:click="closeDialog">Cancel</button>
                 </div>
             </dialog>
         </div>

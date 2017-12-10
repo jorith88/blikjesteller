@@ -36,6 +36,9 @@ var vm = new Vue({
         },
         joinCoop: function() {
             joinCoop(vm.joinCoopId);
+        },
+        closeDialog: function() {
+            closeDialog();
         }
     },
     computed: {
@@ -102,7 +105,7 @@ function startCoop(id) {
 
         vm.coopJoined = false;
         vm.coopStarted = true;
-        document.querySelector('dialog').close();
+        closeDialog();
     });
 }
 
@@ -119,7 +122,7 @@ function joinCoop(id) {
         vm.blikjes = response.data;
         updateTotal();
 
-        document.querySelector('dialog').close();
+        closeDialog();
     });
 }
 
@@ -168,6 +171,9 @@ function coopMinusOne(blikje) {
     coopSocket.send(JSON.stringify(data));
 }
 
+function closeDialog() {
+    document.querySelector('dialog').close();
+}
 
 window.onbeforeunload = function (e) {
     if (vm.stateChanged) {
