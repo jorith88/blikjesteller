@@ -1,11 +1,18 @@
 node {
-
     checkout scm
 
-    stage('Build') {
-        sh 'npm install'
-        sh 'gulp'
-        sh 'gulp cacheBuster'
+    stage('Build frontend') {
+        dir('web') {
+            sh 'npm install'
+            sh 'gulp'
+            sh 'gulp cacheBuster'
+        }
+    }
+
+    stage('Build API') {
+        dir('api') {
+            sh 'mvn clean package'
+        }
     }
 
     stage ('Deploy') {

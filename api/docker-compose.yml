@@ -1,14 +1,8 @@
 version: '3'
 
 services:
-  web:
-    build: web
-    image: blikjesteller
-    ports:
-      - 8181:80
-    restart: always
   api:
-    build: api
+    build: .
     image: blikjesteller-api
     ports:
       - 8509:8009
