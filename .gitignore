@@ -1,3 +1,6 @@
 target/
 node_modules/
-/web/web/
+web/web/
+.classpath
+.settings
+.project

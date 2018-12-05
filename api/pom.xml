@@ -14,24 +14,24 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<version.wildfly.swarm>2018.5.0</version.wildfly.swarm>
+  		<version.thorntail>2.2.1.Final</version.thorntail>
 	</properties>
 
-	<!-- <repositories>
+	<repositories>
 		<repository>
 			<id>Nexus</id>
 			<url>http://nexus.jorith.nl/content/repositories/releases/</url>
 		</repository>
-	</repositories> -->
+	</repositories>
 
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>org.wildfly.swarm</groupId>
-				<artifactId>bom</artifactId>
-				<version>${version.wildfly.swarm}</version>
-				<scope>import</scope>
-				<type>pom</type>
+			<groupId>io.thorntail</groupId>
+			<artifactId>bom</artifactId>
+			<version>${version.thorntail}</version>
+			<type>pom</type>
+			<scope>import</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -103,9 +103,9 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.wildfly.swarm</groupId>
-				<artifactId>wildfly-swarm-plugin</artifactId>
-				<version>${version.wildfly.swarm}</version>
+				<groupId>io.thorntail</groupId>
+				<artifactId>thorntail-maven-plugin</artifactId>
+				<version>${version.thorntail}</version>
 				<executions>
 					<execution>
 						<goals>
