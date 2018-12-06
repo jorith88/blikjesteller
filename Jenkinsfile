@@ -3,15 +3,19 @@ node {
 
     stage('Build frontend') {
         dir('web') {
-            sh 'npm install'
-            sh 'gulp'
-            sh 'gulp cacheBuster'
+            ansiColor('xterm') {
+                sh 'npm install'
+                sh 'gulp'
+                sh 'gulp cacheBuster'
+            }
         }
     }
 
     stage('Build API') {
         dir('api') {
-            sh 'mvn clean package'
+            ansiColor('xterm') {
+                sh 'mvn clean package'
+            }
         }
     }
 
