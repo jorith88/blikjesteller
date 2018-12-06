@@ -16,7 +16,7 @@ node {
     }
 
     stage ('Deploy') {
-        sh "docker-compose up -d"
+        sh "docker-compose up -d --build"
         emailext body: 'Deployed new version to production.', subject: 'Blikjesteller', to: 'jorith@gmail.com'
     }
 }
