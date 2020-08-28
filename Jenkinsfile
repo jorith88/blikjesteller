@@ -3,24 +3,15 @@ node {
 
     stage('Build frontend') {
         dir('web') {
-            ansiColor('xterm') {
-                sh 'npm install'
-                sh 'gulp'
-                sh 'gulp cacheBuster'
-            }
+           def web = docker.build("registry.jorith.nl/blikjesteller/web")
+           web.push()
         }
     }
 
     stage('Build API') {
         dir('api') {
-            ansiColor('xterm') {
-                sh 'mvn clean package'
-            }
+            def api = docker.build("registry.jorith.nl/blikjesteller/api")
+            api.push()
         }
-    }
-
-    stage ('Deploy') {
-        sh "docker-compose up -d --build"
-        emailext body: 'Deployed new version to production.', subject: 'Blikjesteller', to: 'jorith@gmail.com'
     }
 }

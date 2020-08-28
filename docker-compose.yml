@@ -2,14 +2,13 @@ version: '3'
 
 services:
   web:
-    build: web
-    image: blikjesteller
+    image: registry.jorith.nl/blikjesteller/web
     ports:
       - 8181:80
     restart: always
   api:
     build: api
-    image: blikjesteller-api
+    image: registry.jorith.nl/blikjesteller/api
     ports:
       - 8509:8009
       - 8580:8080
